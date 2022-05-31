@@ -14,6 +14,19 @@
    ============================= */
 
 /* === 1. Global / Variables === */
+:root {
+    --primary-colour: #c92c9e;
+    --primary-medium-colour: #822567;
+    --primary-dark-colour: #411934;
+    --secondary-colour: #ee8c2f;
+    --accent-colour: #50b99a;
+}
+
+body {
+    background-color: var(--primary-colour);
+    margin: 0;
+}
+
 /* === 2. Typography =========== */
 /* === 3. General Style ======== */
 /* === 4. Layout =============== */
