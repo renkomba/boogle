@@ -25,6 +25,7 @@
 body {
     background-color: var(--primary-colour);
     margin: 0;
+    scroll-behavior: smooth;
 }
 
 /* === 2. Typography =========== */
