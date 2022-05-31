@@ -35,6 +35,43 @@ body {
 
 /* === 3. General Style ======== */
 /* === 4. Layout =============== */
+nav {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+#logo-and-title {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+}
+
+nav > ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 1.5em;
+    overflow: hidden;
+}
+
+nav li {
+    display: inline-block;
+}
+
+body > article {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.members {
+    display: flex;
+}
 /* === 5. Section Specifics ==== */
 /* --- a. Hero ----------------- */
 /* --- b. Navbar --------------- */
