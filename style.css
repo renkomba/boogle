@@ -29,6 +29,10 @@ body {
 }
 
 /* === 2. Typography =========== */
+body {
+    font-family: lexend, sans-serif;
+}
+
 /* === 3. General Style ======== */
 /* === 4. Layout =============== */
 /* === 5. Section Specifics ==== */
