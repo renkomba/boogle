@@ -19,6 +19,7 @@
     --primary-medium-colour: #822567;
     --primary-dark-colour: #411934;
     --secondary-colour: #ee8c2f;
+    --secondary-light-colour: antiquewhite;
     --accent-colour: #50b99a;
 }
 
@@ -33,8 +34,66 @@ body {
     font-family: lexend, sans-serif;
 }
 
+nav,
+nav a {
+    color: var(--secondary-light-colour);
+    text-decoration: none;
+}
+
+.teams,
+.team,
+.member,
+#sign-up {
+    text-align: center;
+}
+
 /* === 3. General Style ======== */
+#hero {
+    object-fit: cover;
+    object-position: center;
+    height: auto;
+    width: 100vw;
+    
+}
+
+.member > img {
+    width: auto;
+    height: 10rem;
+}
+
+#logo {
+    width: 3rem;
+    height: auto;
+    margin: auto 0;
+}
+
+nav {
+    background-color: #411934;
+    margin: 0;
+}
+
+nav a {
+    border-right: 2px solid var(--primary-dark-colour);
+    padding: .25em 1em;
+}
+
+nav a:last-child {
+    border-right: none;
+}
+
+nav li {
+    cursor: pointer;
+}
+
+nav li:hover {
+    background-color: #50b99a;
+}
+
 /* === 4. Layout =============== */
+body {
+    max-width: 100vw;
+}
+
 nav {
     display: flex;
     flex-flow: row wrap;
@@ -47,6 +106,12 @@ nav {
     display: grid;
     grid-auto-flow: column;
     align-items: center;
+    margin-left: 2rem;
+}
+
+#title h1,
+#title p {
+    margin: .1rem .5rem;
 }
 
 nav > ul {
@@ -61,16 +126,27 @@ nav li {
     display: inline-block;
 }
 
-body > article {
+main > article {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    margin: 0 4rem;
 }
+
 
 .members {
     display: flex;
+    flex-flow: row wrap;
+}
+
+#sign-up legend {
+    margin: 0 auto;
+}
+
+#sign-up label {
+    margin-bottom: .5em;
 }
 /* === 5. Section Specifics ==== */
 /* --- a. Hero ----------------- */
