@@ -15,16 +15,24 @@
 
 /* === 1. Global / Variables === */
 :root {
-    --primary-colour: #c92c9e;
-    --primary-medium-colour: #822567;
-    --primary-dark-colour: #411934;
-    --secondary-colour: #ee8c2f;
-    --secondary-light-colour: antiquewhite;
-    --accent-colour: #50b99a;
+    /* --primary-colour: #c92c9e; */
+    /* --primary-medium-colour: #822567; */
+    /* --primary-dark-colour: #411934; */
+    /* --secondary-colour: #ee8c2f; */
+    /* --secondary-light-colour: antiquewhite; */
+    /* --accent-colour: #50b99a; */
+    --primary-colour: #c7c5c7;
+    --primary-medium-colour: #5a5859;
+    --primary-dark-colour: #2b292a;
+    --secondary-colour: #f1efed;
+    --secondary-light-colour: white;
+    --accent-colour: #0f1010;
+    /* add honeycomb png for occasional accent pop & perspective on glass containers */
 }
 
 body {
     background-color: var(--primary-colour);
+    /* background-image: url(Boogle.png); */
     margin: 0;
     scroll-behavior: smooth;
 }
@@ -35,7 +43,9 @@ body {
 }
 
 nav,
-nav a {
+nav a,
+footer,
+footer a {
     color: var(--secondary-light-colour);
     text-decoration: none;
 }
@@ -43,16 +53,22 @@ nav a {
 .teams,
 .team,
 .member,
+.feature,
 #sign-up {
     text-align: center;
 }
 
 /* === 3. General Style ======== */
+.hidden {
+    display: none;
+}
+
 #hero {
+    display: block;
     object-fit: cover;
     object-position: center;
     height: auto;
-    width: 100vw;
+    max-width: 100vw;
 }
 
 .member > img {
@@ -66,8 +82,9 @@ nav a {
     margin: .25rem 0;
 }
 
-nav {
-    background-color: #411934;
+nav,
+footer {
+    background-color: var(--primary-dark-colour);
     margin: 0;
 }
 
@@ -85,12 +102,54 @@ nav li {
 }
 
 nav li:hover {
-    background-color: #50b99a;
+    background-color: var(--accent-colour);
+}
+
+.feature {
+    padding: 1.5em;
+    width: 250px;
+    height: 200px;
+    /* row-gap: 10rem; */
+}
+
+.feature img {
+    height: 300px;
+    position: relative;
+    top: -150px;
+}
+
+/* #ed-tech {
+    display: flex;
+    overflow-x: scroll;
+    width: 80vw;
+    text-align: center;
+} */
+
+#integrated img {
+    height: 20vh;
+    width: auto;
+}
+
+#integrated figcaption {
+    position: relative;
+    top: -150px;
+}
+
+.feature h3,
+.feature p {
+    position: relative;
+    top: -150px;
+}
+
+#this-is-language-img,
+#formative-img {
+    border-radius: 50%;
 }
 
 /* === 4. Layout =============== */
 body {
     max-width: 100vw;
+    overflow-y: scroll;
 }
 
 nav {
@@ -125,19 +184,41 @@ nav li {
     display: inline-block;
 }
 
-main > article {
+.container {
+    align-items: center;
+    background-color: hsla(0, 0%, 100%, .7);
+    /* check Mozilla compatibility */
+    backdrop-filter: blur(8px);
+    border: 1px solid grey;
     display: flex;
+    fill-opacity: 50%;
     flex-flow: column nowrap;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin: 0 4rem;
+    /* min-height: 100vh; */
+    margin: 5rem;
 }
 
+#features {
+    display: grid;
+    justify-items: center;
+}
+
+#feature-cards {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+}
+
+iframe {
+    width: 60vw;
+    height: 34vw;
+    margin-bottom: 4em;
+}
 
 .members {
     display: flex;
     flex-flow: row wrap;
+    justify-content: center;
 }
 
 #sign-up legend {
@@ -146,6 +227,11 @@ main > article {
 
 #sign-up label {
     margin-bottom: .5em;
+}
+
+footer {
+    display: flex;
+    flex-flow: row-reverse wrap;
 }
 /* === 5. Section Specifics ==== */
 /* --- a. Hero ----------------- */
