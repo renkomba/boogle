@@ -190,6 +190,7 @@ nav li {
     /* check Mozilla compatibility */
     backdrop-filter: blur(8px);
     border: 1px solid grey;
+    box-shadow: 0 0 40px 7px var(--secondary-light-colour);
     display: flex;
     fill-opacity: 50%;
     flex-flow: column nowrap;
