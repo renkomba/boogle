@@ -4,7 +4,6 @@ const replicateNode = (node, times=1) => {
     let collection = [];
 
     while (collection.length < times) {
-        node.querySelector('img').src = 
         collection.push(node.cloneNode(true));
     }
 
@@ -40,10 +39,10 @@ const profPics = {
 
 const getProfPicAttributes = isFem => {
     let gender = isFem ? 'fem' : 'masc';
-    let urls = Object.entries( profPics[gender] );
+    let urls = Object.values( profPics[gender] );
     let i = Math.floor( Math.random() * urls.length );
     let alt = isFem ? 'female avatar' : 'male avatar';
-    return [ profPics[gender][ urls[i] ], alt ];
+    return [ urls[i] , alt ];
 }
 
 const students = {
@@ -130,7 +129,9 @@ const students = {
 };
 
 const addProfPic = students => {
+    // debugger;
     for (let student in students) {
+        student = students[student];
         [ student.profPicSrc, student.profPicAlt ] = getProfPicAttributes(student.isFem);
     } 
 }
@@ -179,15 +180,22 @@ const memberPrime = document.querySelector('.member');
 
 
 const fillTeams = teamNames => {
-    for (let teamName in teamNames) {
+    let teamArticles = [];
+    
+    for (let teamName of teamNames) {
         let teamArticle = teamPrime.cloneNode(true);
         teamArticle.querySelector('h3').innerHTML = teamName;
         teamArticle.querySelector('p').innerHTML = teams[teamName].description;
         labelMembers(teamArticle, teams[teamName].members);
+        teamArticles.push(teamArticle);
     }
+    debugger;
+
+    allTeams.append( ...teamArticles );
 }
 
 const labelMembers = (node, teamMembers) => {
+    // debugger;
     let membersNode = node.querySelector('.members');
     membersNode.append( ...replicateNode(
         memberPrime.cloneNode(true),
@@ -195,17 +203,17 @@ const labelMembers = (node, teamMembers) => {
     ) );
 
     for (let i = 0; i < teamMembers.length; i++) {
-        let memberNode = membersNode[i];
+        let memberNode = membersNode.children[i];
+        if (memberNode.nodeName === '#text') continue;
+
         let {profPicSrc, profPicAlt, nickname} = teamMembers[i];
         memberNode.querySelector('img').src = profPicSrc;
         memberNode.querySelector('img').alt = profPicAlt;
         memberNode.querySelector('.member-alias').innerHTML = nickname;
     };
-
-    allTeams.append(membersNode);
 }
 
-labelMembers(document.querySelector('.team'), teams.Branding.members);
+fillTeams(teamNames);
 
 console.log(teams.Branding.members);
 
