@@ -1,3 +1,16 @@
+const replicateNode = (node, times=1) => {
+    // debugger;
+    if (times < 1) return;
+    let collection = [];
+
+    while (collection.length < times) {
+        node.querySelector('img').src = 
+        collection.push(node.cloneNode(true));
+    }
+
+    return collection;
+}
+
 const profPics = {
     fem: {
       longPony: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700055/171659484-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6',
@@ -23,135 +36,184 @@ const profPics = {
       noBangsBeardGlasses: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700051/171659364-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
       reverseBangsNoBeard: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700049/171659475-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6'
     }
-  };
+};
 
-  const getProfPic = isFem => {
-      let keys = Object.keys( profPics[isFem ? 'fem' : 'masc'] );
-      let i = Math.floor( Math.random() * keys.length );
-      return profPics[isFem ? 'fem' : 'masc'][ keys[i] ]
-  }
+const getProfPicAttributes = isFem => {
+    let gender = isFem ? 'fem' : 'masc';
+    let urls = Object.entries( profPics[gender] );
+    let i = Math.floor( Math.random() * urls.length );
+    let alt = isFem ? 'female avatar' : 'male avatar';
+    return [ profPics[gender][ urls[i] ], alt ];
+}
 
-  const students = {
-      Mia: {
-          nickname: 'shoes',
-          team: 'Branding',
-          isFem: true
-      },
-      Liam: {
-          nickname: 'Polar Express',
-          team: 'Branding',
-          isFem: false
-      },
-      Hazel: {
-          nickname: 'Picasso',
-          team: 'Branding',
-          isFem: true
-      },
-      Maggie: {
-          nickname: 'Swan',
-          team: 'Managing',
-          isFem: true
-      },
-      Dwight: {
-          nickname: 'Schrute',
-          team: 'Marketing',
-          isFem: false
-      },
-      Ben: {
-          nickname: 'Linguini',
-          team: 'Wording',
-          isFem: false
-      },
-      Zack: {
-          nickname: 'Smile',
-          team: 'Branding',
-          isFem: false
-      },
-      Timberly: {
-          nickname: 'Brains',
-          team: 'Engineering',
-          isFem: true
-      },
-      Rossmary: {
-          nickname: 'Boss',
-          team: 'Managing',
-          isFem: true
-      },
-      Julie: {
-          nickname: 'Bold',
-          team: 'Branding',
-          isFem: true
-      },
-      Albert: {
-          nickname: 'Nemesis',
-          team: 'Branding',
-          isFem: false
-      },
-      Alexandra: {
-          nickname: 'Wheels',
-          team: 'Wording',
-          isFem: true
-      },
-      Naomi: {
-          nickname: 'Brains',
-          team: 'Wording',
-          isFem: true
-      },
-      Fetra: {
-          nickname: 'Vibes',
-          team: 'Wording',
-          isFem: false
-      },
-      Liem: {
-          nickname: 'Secretary',
-          team: 'Branding',
-          isFem: false
-      },
-      Kaily: {
-          nickname: 'Style',
-          team: 'Wording',
-          isFem: true
-      }
-  };
+const students = {
+    Mia: {
+        nickname: 'shoes',
+        team: 'Branding',
+        isFem: true
+    },
+    Liam: {
+        nickname: 'Polar Express',
+        team: 'Branding',
+        isFem: false
+    },
+    Hazel: {
+        nickname: 'Picasso',
+        team: 'Branding',
+        isFem: true
+    },
+    Maggie: {
+        nickname: 'Swan',
+        team: 'Managing',
+        isFem: true
+    },
+    Dwight: {
+        nickname: 'Schrute',
+        team: 'Marketing',
+        isFem: false
+    },
+    Ben: {
+        nickname: 'Linguini',
+        team: 'Wording',
+        isFem: false
+    },
+    Zack: {
+        nickname: 'Smile',
+        team: 'Branding',
+        isFem: false
+    },
+    Timberly: {
+        nickname: 'Brains',
+        team: 'Engineering',
+        isFem: true
+    },
+    Rossmary: {
+        nickname: 'Boss',
+        team: 'Managing',
+        isFem: true
+    },
+    Julie: {
+        nickname: 'Bold',
+        team: 'Branding',
+        isFem: true
+    },
+    Albert: {
+        nickname: 'Nemesis',
+        team: 'Branding',
+        isFem: false
+    },
+    Alexandra: {
+        nickname: 'Wheels',
+        team: 'Wording',
+        isFem: true
+    },
+    Naomi: {
+        nickname: 'Brains',
+        team: 'Wording',
+        isFem: true
+    },
+    Fetra: {
+        nickname: 'Vibes',
+        team: 'Wording',
+        isFem: false
+    },
+    Liem: {
+        nickname: 'Secretary',
+        team: 'Branding',
+        isFem: false
+    },
+    Kaily: {
+        nickname: 'Style',
+        team: 'Wording',
+        isFem: true
+    }
+};
 
-  const addProfPic = students => {
-      for (let student in students) {
-          student.profPic = getProfPic(student.isFem);
-      } 
-  }
+const addProfPic = students => {
+    for (let student in students) {
+        [ student.profPicSrc, student.profPicAlt ] = getProfPicAttributes(student.isFem);
+    } 
+}
 
-  addProfPic();
+addProfPic(students);
 
-  const getTeamMembers = team => {
-      let members = [];
+const getTeamMembers = team => {
+    let members = [];
 
-      for (let student in students) {
-          console.log( ({nickname, profPic}) => ({nickname, profPic})(student) );
-          if (student.team === team) members.push(student);
-      }
+    for (let student in students) {
+        student = students[student];
+        // console.log( ({nickname, profPic}) => ({nickname, profPic})(student) );
+        if (student.team === team) members.push(student);
+    }
+    // console.log(`${team}: ${members.length} members (${members})`);
+    return members;
+}
 
-      return members;
-  }
+const teams = {
+    Branding: {
+        description: 'We made the images/logo and chose the fonts, layout, and colours.',
+        members: getTeamMembers('Branding')
+    },
+    Wording: {
+        description: 'We scripted, translated, and recorded the video as well as the words on the site.',
+        members: getTeamMembers('Wording')
+    },
+    Managing: {
+        description: 'We organised chaos and gave Madame homework.',
+        members: getTeamMembers('Managing')
+    },
+    Marketing: {
+        description: 'We came up with a marketing approach and the teachers we wanted to market to.',
+        members: getTeamMembers('Marketing')
+    },
+    Engineering: {
+        description: 'We wireframed, designed, and built the site.',
+        members: getTeamMembers('Engineering')
+    }
+};
 
-  const teams = {
-      Branding: {
-          description: 'We made the images/logo and chose the fonts, layout, and colours.',
-          members: getTeamMembers('Branding')
-      },
-      Wording: {
-          description: 'We scripted, translated, and recorded the video as well as the words on the site.',
-          members: getTeamMembers('Wording')
-      },
-      Managing: {
-          description: 'We organised chaos and gave Madame homework.',
-          members: getTeamMembers('Managing')
-      },
-      Marketing: {
-          description: 'We came up with a marketing approach and the teachers we wanted to market to.',
-          members: getTeamMembers('Marketing')
-      },
-      Engineering: {
-          description: 'We wireframed, designed, and built the site.',
-          members: getTeamMembers('Engineering')
-      }
-  };
+let teamNames = Object.keys(teams);
+const allTeams = document.querySelector('#teams');
+const teamPrime = document.querySelector('.team');
+const memberPrime = document.querySelector('.member');
+
+
+const fillTeams = teamNames => {
+    for (let teamName in teamNames) {
+        let teamArticle = teamPrime.cloneNode(true);
+        teamArticle.querySelector('h3').innerHTML = teamName;
+        teamArticle.querySelector('p').innerHTML = teams[teamName].description;
+        labelMembers(teamArticle, teams[teamName].members);
+    }
+}
+
+const labelMembers = (node, teamMembers) => {
+    let membersNode = node.querySelector('.members');
+    membersNode.append( ...replicateNode(
+        memberPrime.cloneNode(true),
+        teamMembers.length - 1
+    ) );
+
+    for (let i = 0; i < teamMembers.length; i++) {
+        let memberNode = membersNode[i];
+        let {profPicSrc, profPicAlt, nickname} = teamMembers[i];
+        memberNode.querySelector('img').src = profPicSrc;
+        memberNode.querySelector('img').alt = profPicAlt;
+        memberNode.querySelector('.member-alias').innerHTML = nickname;
+    };
+
+    allTeams.append(membersNode);
+}
+
+labelMembers(document.querySelector('.team'), teams.Branding.members);
+
+console.log(teams.Branding.members);
+
+// EdTech Logos
+const edtech = {
+    blooket: {
+        idFigure: 'this-is-language',
+        src: '',
+        idImg: 'this-is-language-img'
+    },
+}
