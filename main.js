@@ -1,6 +1,6 @@
 const replicateNode = (node, times=1) => {
     // debugger;
-    if (times < 1) return;
+    if (times < 1) return [];
     let collection = [];
 
     while (collection.length < times) {
@@ -181,6 +181,7 @@ const memberPrime = document.querySelector('.member');
 
 const fillTeams = teamNames => {
     let teamArticles = [];
+    // debugger;
     
     for (let teamName of teamNames) {
         let teamArticle = teamPrime.cloneNode(true);
@@ -189,7 +190,6 @@ const fillTeams = teamNames => {
         labelMembers(teamArticle, teams[teamName].members);
         teamArticles.push(teamArticle);
     }
-    debugger;
 
     allTeams.append( ...teamArticles );
 }
