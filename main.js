@@ -1,53 +1,46 @@
-const replicateNode = (node, times=1) => {
-    // debugger;
-    if (times < 1) return [];
-    let collection = [];
+// PRIMARY OBJECT FUNCTIONS
+// repeated code looping through students obj. Should it be global?
 
-    while (collection.length < times) {
-        collection.push(node.cloneNode(true));
+const getTeamMembers = team => {
+    let members = [];
+
+    for (let student in students) {
+        student = students[student];
+        if (student.team === team) members.push(student);
     }
 
-    return collection;
+    return members;
 }
 
-const profPics = {
-    fem: {
-      longPony: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700055/171659484-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6',
-      longBraid: 'https://st4.depositphotos.com/9998432/23754/v/600/depositphotos_237542156-stock-illustration-person-gray-photo-placeholder-woman.jpg',
-      shortThick: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700056/171659863-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6',
-      updo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo5xvMa780IOgGrq8AWIexThOG3RQhIR4IDlVdWFDbxC3F5jt-',
-      longDown: 'https://jtphealth.com/wp-content/uploads/2021/06/profile-placeholder-female-3.png',
-      longDownLeft: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700058/171681534-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6',
-      longDownRight: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700047/171681530-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6',
-      longDownLeftRight: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700060/171660244-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6',
-      shortBobUneven: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700063/171681536-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6',
-      shortWavy: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700061/171658815-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6',
-      shortBobEven: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700050/171681531-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6'
-    },
-    masc: {
-      noBangsBeard: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700053/171681533-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
-      noBangsNoBeard: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700046/171681529-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
-      noBangsNoBeardFlyaways: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700059/171660361-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
-      bangsNoBeardVolume: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700045/171681528-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
-      bangsNoBeard: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700057/171660082-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
-      thickBeard: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700048/171659491-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
-      noBangsNoBeardGlasses: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700054/171659444-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
-      noBangsBeardGlasses: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700051/171659364-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
-      reverseBangsNoBeard: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700049/171659475-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6'
-    }
-};
+const addProfPic = students => {
+    // debugger;
+    for (let student in students) {
+        student = students[student];
+        [ student.profPicSrc, student.profPicAlt ] = getProfPicAttributes(student.isFem);
+    } 
+}
 
 const getProfPicAttributes = isFem => {
-    let gender = isFem ? 'fem' : 'masc';
-    let urls = Object.values( profPics[gender] );
-    let i = Math.floor( Math.random() * urls.length );
-    let alt = isFem ? 'female avatar' : 'male avatar';
-    return [ urls[i] , alt ];
+    let [ alt, urlKey, urlValue ] = [
+        isFem ? 'female avatar' : 'male avatar',
+        '', ''
+    ];
+
+    let urls = Object.entries( profPics[alt] );
+    [ urlKey, urlValue ] = urls[ getI(urls) ];
+
+    delete profPics[alt][urlKey];
+    return [ urlValue , alt ];
 }
 
+const getI = arr => {
+    return Math.floor( Math.random() * arr.length );
+} 
+
+// PRIMARY OBJECTS
 const students = {
     Mia: {
-        nickname: 'shoes',
+        nickname: 'Shoes',
         team: 'Branding',
         isFem: true
     },
@@ -92,7 +85,7 @@ const students = {
         isFem: true
     },
     Julie: {
-        nickname: 'Bold',
+        nickname: 'Camel',
         team: 'Branding',
         isFem: true
     },
@@ -102,12 +95,12 @@ const students = {
         isFem: false
     },
     Alexandra: {
-        nickname: 'Wheels',
+        nickname: 'Flowers',
         team: 'Wording',
         isFem: true
     },
     Naomi: {
-        nickname: 'Brains',
+        nickname: 'Icon',
         team: 'Wording',
         isFem: true
     },
@@ -117,38 +110,43 @@ const students = {
         isFem: false
     },
     Liem: {
-        nickname: 'Secretary',
+        nickname: 'Junior',
         team: 'Branding',
         isFem: false
     },
     Kaily: {
-        nickname: 'Style',
+        nickname: 'Fashion',
         team: 'Wording',
         isFem: true
     }
 };
 
-const addProfPic = students => {
-    // debugger;
-    for (let student in students) {
-        student = students[student];
-        [ student.profPicSrc, student.profPicAlt ] = getProfPicAttributes(student.isFem);
-    } 
-}
-
-addProfPic(students);
-
-const getTeamMembers = team => {
-    let members = [];
-
-    for (let student in students) {
-        student = students[student];
-        // console.log( ({nickname, profPic}) => ({nickname, profPic})(student) );
-        if (student.team === team) members.push(student);
+const profPics = {
+    'female avatar': {
+      longPony: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700055/171659484-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6',
+      longBraid: 'https://st4.depositphotos.com/9998432/23754/v/600/depositphotos_237542156-stock-illustration-person-gray-photo-placeholder-woman.jpg',
+      shortThick: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700056/171659863-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6',
+      updo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQo5xvMa780IOgGrq8AWIexThOG3RQhIR4IDlVdWFDbxC3F5jt-',
+      longDown: 'https://jtphealth.com/wp-content/uploads/2021/06/profile-placeholder-female-3.png',
+      longDownLeft: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700058/171681534-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6',
+      longDownRight: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700047/171681530-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6',
+      longDownLeftRight: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700060/171660244-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6',
+      shortBobUneven: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700063/171681536-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6',
+      shortWavy: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700061/171658815-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6',
+      shortBobEven: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700050/171681531-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-woman-in-t-shirt.jpg?ver=6'
+    },
+    'male avatar': {
+      noBangsBeard: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700053/171681533-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
+      noBangsNoBeard: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700046/171681529-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
+      noBangsNoBeardFlyaways: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700059/171660361-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
+      bangsNoBeardVolume: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700045/171681528-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
+      bangsNoBeard: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700057/171660082-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
+      thickBeard: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700048/171659491-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
+      noBangsNoBeardGlasses: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700054/171659444-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
+      noBangsBeardGlasses: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700051/171659364-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6',
+      reverseBangsNoBeard: 'https://us.123rf.com/450wm/apoev/apoev2107/apoev210700049/171659475-stock-vector-default-avatar-photo-placeholder-gray-profile-picture-icon-man-in-t-shirt.jpg?ver=6'
     }
-    // console.log(`${team}: ${members.length} members (${members})`);
-    return members;
-}
+};
 
 const teams = {
     Branding: {
@@ -173,27 +171,12 @@ const teams = {
     }
 };
 
-let teamNames = Object.keys(teams);
+// GLOBAL VARIABLES
 const allTeams = document.querySelector('#teams');
 const teamPrime = document.querySelector('.team');
 const memberPrime = document.querySelector('.member');
 
-
-const fillTeams = teamNames => {
-    let teamArticles = [];
-    // debugger;
-    
-    for (let teamName of teamNames) {
-        let teamArticle = teamPrime.cloneNode(true);
-        teamArticle.querySelector('h3').innerHTML = teamName;
-        teamArticle.querySelector('p').innerHTML = teams[teamName].description;
-        labelMembers(teamArticle, teams[teamName].members);
-        teamArticles.push(teamArticle);
-    }
-
-    allTeams.append( ...teamArticles );
-}
-
+// ANCILLARY FUNCTIONS
 const labelMembers = (node, teamMembers) => {
     // debugger;
     let membersNode = node.querySelector('.members');
@@ -213,9 +196,41 @@ const labelMembers = (node, teamMembers) => {
     };
 }
 
-fillTeams(teamNames);
+const replicateNode = (node, times=1) => {
+    // debugger;
+    if (times < 1) return [];
+    let collection = [];
 
-console.log(teams.Branding.members);
+    while (collection.length < times) {
+        collection.push(node.cloneNode(true));
+    }
+
+    return collection;
+}
+
+// MAIN FUNCTION
+const fillTeams = () => {
+    let [ teamNames, teamArticles ] = [
+        Object.keys(teams),
+        []
+    ];
+    // debugger;
+    
+    for (let teamName of teamNames) {
+        let teamArticle = teamPrime.cloneNode(true);
+        teamArticle.querySelector('h3').innerHTML = teamName;
+        teamArticle.querySelector('p').innerHTML = teams[teamName].description;
+        labelMembers(teamArticle, teams[teamName].members);
+        teamArticles.push(teamArticle);
+    }
+
+    allTeams.append( ...teamArticles );
+}
+
+
+// PROGRAM EXECUTIONS
+addProfPic(students);
+fillTeams();
 
 // EdTech Logos
 const edtech = {
