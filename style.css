@@ -240,5 +240,20 @@ footer {
 /* --- c. Vision --------------- */
 /* --- d. Features ------------- */
 /* --- e. Teams ---------------- */
+.card {
+    cursor: pointer;
+}
 /* --- f. Sign Up -------------- */
 /* --- g. Footer --------------- */
+
+
+
+/* h. blob */
+/* .blob {
+    border-radius: 10rem 5rem 12rem 6rem / 2.5rem 7rem 8rem 2rem;
+    transition: all 500ms ease-in-out;
+}
+
+.blob:hover {
+    border-radius: 10% 20% 30% 40% / 80% 60% 15% 12%;
+} */
