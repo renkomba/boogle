@@ -70,17 +70,17 @@ const students = {
         isFem: false
     },
     Zack: {
-        nickname: 'Smile',
+        nickname: 'The Smile',
         team: 'Branding',
         isFem: false
     },
     Timberly: {
-        nickname: 'Brains',
+        nickname: 'The Brains',
         team: 'Engineering',
         isFem: true
     },
     Rossmary: {
-        nickname: 'Boss',
+        nickname: 'The Boss',
         team: 'Managing',
         isFem: true
     },
@@ -100,17 +100,17 @@ const students = {
         isFem: true
     },
     Naomi: {
-        nickname: 'Icon',
+        nickname: 'Her',
         team: 'Wording',
         isFem: true
     },
     Fetra: {
-        nickname: 'Vibes',
+        nickname: 'Cool Cucumber',
         team: 'Wording',
         isFem: false
     },
     Liem: {
-        nickname: 'Junior',
+        nickname: 'Madame Junior',
         team: 'Branding',
         isFem: false
     },
