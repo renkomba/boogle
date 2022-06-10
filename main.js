@@ -85,7 +85,7 @@ const students = {
         isFem: true
     },
     Julie: {
-        nickname: 'Camel',
+        nickname: 'Camels',
         team: 'Branding',
         isFem: true
     },
