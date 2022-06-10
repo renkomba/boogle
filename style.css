@@ -58,6 +58,24 @@ footer a {
     text-align: center;
 }
 
+h2, h3 {
+    text-transform: uppercase;
+}
+
+.feature h2 {
+    letter-spacing: 3px;
+    font-size: 30px;
+}
+
+.feature h3 {
+    letter-spacing: 2px;
+    font-size: 20px;
+}
+
+.feature p {
+    line-height: 1.5;
+}
+
 /* === 3. General Style ======== */
 .hidden {
     display: none;
@@ -109,13 +127,20 @@ nav li:hover {
     padding: 1.5em;
     width: 250px;
     height: 200px;
-    /* row-gap: 10rem; */
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+}
+
+.feature:hover {
+    transform: translateY(-15px);
 }
 
 .feature img {
     height: 300px;
-    position: relative;
-    top: -150px;
+}
+
+.feature:hover img {
+    scale: 1.15;
 }
 
 /* #ed-tech {
@@ -132,13 +157,7 @@ nav li:hover {
 
 #integrated figcaption {
     position: relative;
-    top: -150px;
-}
-
-.feature h3,
-.feature p {
-    position: relative;
-    top: -150px;
+    top: -100px;
 }
 
 #this-is-language-img,
@@ -184,20 +203,6 @@ nav li {
     display: inline-block;
 }
 
-.container {
-    align-items: center;
-    background-color: hsla(0, 0%, 100%, .7);
-    /* check Mozilla compatibility */
-    backdrop-filter: blur(8px);
-    border: 1px solid grey;
-    box-shadow: 0 0 40px 7px var(--secondary-light-colour);
-    display: flex;
-    fill-opacity: 50%;
-    flex-flow: column nowrap;
-    justify-content: center;
-    /* min-height: 100vh; */
-    margin: 5rem;
-}
 
 #features {
     display: grid;
@@ -208,6 +213,45 @@ nav li {
     display: flex;
     justify-content: center;
     flex-flow: row wrap;
+    margin-top: 17.5rem;
+}
+
+.feature {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column nowrap;
+    padding: 1.5rem;
+    margin: 0 5rem 20rem;
+}
+
+.feature:last-of-type {
+    margin-bottom: 3rem;
+}
+
+.feature::after {
+    content: "";
+    fill-opacity: 50%;
+    width: 300px;
+    background-color: hsla(0, 0%, 100%, .7);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 40px 7px var(--secondary-light-colour);
+    z-index: -1;
+    position: relative;
+    top: -150px;
+    left: 0;
+    padding: 7em 0;
+}
+
+.container {
+    align-items: center;
+    background-color: hsla(0, 0%, 100%, .7);
+    border: 1px solid grey;
+    display: flex;
+    fill-opacity: 50%;
+    flex-flow: column nowrap;
+    justify-content: center;
+    margin: 0 5rem 20rem;
 }
 
 iframe {
