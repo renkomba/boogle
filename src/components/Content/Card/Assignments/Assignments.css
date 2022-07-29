@@ -1,0 +1,9 @@
+.assignments {
+    margin: 3rem 1.5rem;
+    min-width: 10vw;
+    font-size: clamp(.75rem 2.25vw 1.5rem);
+}
+
+.assignments .assignment:last-child {
+    margin-bottom: 2rem;
+}

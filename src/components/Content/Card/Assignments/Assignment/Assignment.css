@@ -1,0 +1,22 @@
+.assignment {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: start;
+    margin: 0 .5rem 0;
+}
+
+.assignment p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin: .5rem 0 .75rem .5rem;
+}
+
+.assignment-title {
+    white-space: normal;
+}
+
+.assignment-type,
+.assignment-title {
+    cursor: pointer;
+}

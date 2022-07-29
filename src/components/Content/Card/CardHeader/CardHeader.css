@@ -1,0 +1,30 @@
+.card-header {
+    text-align: center;
+    background-color: var(--light-font-colour);
+    padding: 3rem;
+    cursor: pointer;
+    transition: .5s;
+    align-items: center;
+}
+
+/* ===== HOVER EFFECTS ===== */
+.card header:hover {
+    background-color: var(--deep-colour);
+    color: var(--light-header-colour);
+}
+
+.card header:hover > .prep-period {
+    border-color: var(--light-header-colour);
+}
+
+.card header:hover > .card .prep::after {
+    content: '';
+    display: inline-block;
+    margin: 0rem 1.5rem 0rem .5rem;
+    min-height: 2rem;
+    background-color: var(--light-font-colour);
+    width: .5rem;
+    position: relative;
+    right: -.5rem;
+    top: .25rem;
+}
