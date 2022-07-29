@@ -1,0 +1,8 @@
+.card {
+    border: 2px solid grey;
+    cursor: move;
+    font-size: 1.25rem;
+    display: flex;
+    margin: 2rem;
+    flex: 3 3 90vw;
+}

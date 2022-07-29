@@ -1,0 +1,30 @@
+.prep {
+    margin: 0;
+    min-width: 10rem;
+    height: fit-content;
+    cursor: pointer;
+}
+
+.prep.prep.horizontal {
+    margin-left: .75rem;
+}
+
+.prep.vertical::after {
+    content: '';
+    display: block;
+    margin-bottom: 1.5rem;
+    min-height: .5rem;
+    background-color: var(--deep-colour);
+}
+
+.prep.horizontal::after {
+    content: '';
+    display: inline-block;
+    margin: 0rem 1.5rem 0rem .5rem;
+    min-height: 2rem;
+    background-color: var(--deep-colour);
+    width: .5rem;
+    position: relative;
+    right: -.5rem;
+    top: .25rem;
+}

@@ -1,0 +1,32 @@
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--deep-colour);
+    color: var(--light-font-colour);
+    text-align: center;
+}
+
+footer .logo {
+    width: 2rem;
+    margin-right: .5rem;
+}
+
+footer p {
+    font-size: 1.5rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    footer:hover .logo {
+      animation: logo-spin infinite 20s linear;
+    }
+}
+
+@keyframes logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}

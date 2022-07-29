@@ -27,7 +27,7 @@
     --secondary-colour: #f1efed;
     --secondary-light-colour: white;
     --accent-colour: #0f1010;
-    --bokeh: url(https://www.wallpaperflare.com/static/202/435/755/simple-background-purple-black-bokeh-wallpaper.jpg);
+    --bokeh: url("https://www.wallpaperflare.com/static/202/435/755/simple-background-purple-black-bokeh-wallpaper.jpg");
     /* add honeycomb png for occasional accent pop & perspective on glass containers */
 }
 

@@ -1,0 +1,35 @@
+.prep-period {
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: .25rem;
+    cursor: pointer;
+    transition: .3s;
+    padding: calc( (3rem - .5rem) / 2) 0;
+    box-sizing: border-box;
+    width: 4rem;
+    height: 4rem;
+}
+
+.prep-period.small {
+    font-size: 1rem;
+    padding: calc( (2rem - .75rem) / 2) 0;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+/* ===== HOVER EFFECTS ===== */
+.prep-period:hover {
+    border-color: var(--light-header-colour);
+    background-color: var(--light-font-colour);
+    color: var(--deep-colour);
+    font-size: 2rem;
+    padding: calc( (3rem - 1.25rem) / 2) 0;
+}
+
+.prep-period.small:hover {
+    border-color: var(--light-header-colour);
+    background-color: var(--light-font-colour);
+    color: var(--deep-colour);
+    font-size: 1.5rem;
+    padding: calc( (1.5rem - .75rem) / 2) 0;
+}
