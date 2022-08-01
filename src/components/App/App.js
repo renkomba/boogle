@@ -1,5 +1,6 @@
 // import { render } from '@testing-library/react';
 import React, { useEffect, useState } from 'react';
+import {} from '@dnd-kit/core';
 import { Teacher } from '../../classes/Teacher';
 import { Banner } from '../Banner/Banner';
 import { Content } from '../Content/Content';

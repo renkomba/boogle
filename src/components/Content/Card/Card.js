@@ -6,13 +6,14 @@ import { Assignments } from "./Assignments/Assignments"
 
 export const Card = ({ prep, prepPeriods, totalStudents }) => {
     const [minimised, setMinimised] = useState(false);
+    
     // useEffect(
     //     () => {console.log(minimised ? 'Maximising...' : 'Minimising...');},
     //     [minimised]
     // );
 
     return (
-        <article draggable="true" className="card">
+        <article className="card" draggable='true'>
             <MaximiseIcon style={minimised ? {display: 'flex'} : {display: 'none'}} />
 
             <CardHeader prep={prep} prepPeriods={prepPeriods} verticalHeader={!minimised}
