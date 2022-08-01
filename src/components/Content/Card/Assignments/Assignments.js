@@ -5,6 +5,7 @@ import './Assignments.css';
 
 export const Assignments = ({ totalStudents, minimised }) => {
     const generateAssignments = (amount=5, totalStudents=30) => {
+        console.log('Generating assignments...');
         let assignments = [];
         for (let i = 0; i < amount; i++) {
             assignments.push(<Assignment key={`${i}9a`}
