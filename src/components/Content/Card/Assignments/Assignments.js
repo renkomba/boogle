@@ -19,10 +19,12 @@ export const Assignments = ({ totalStudents, minimised }) => {
         <table className="assignments"
             style={minimised ? {display: 'none'} : {display: ''}}>
             <thead>
-                <th>icon</th>
-                <th>type</th>
-                <th>title</th>
-                <th>rate</th>
+                <tr>
+                    <td>icon</td>
+                    <td>type</td>
+                    <td>title</td>
+                    <td>rate</td>
+                </tr>
             </thead>
             <tbody>
                 {generateAssignments(getRandomNum(11, 1), totalStudents)}
