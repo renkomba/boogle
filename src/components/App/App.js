@@ -38,8 +38,9 @@ const dragNarration = {
 
 const App = () => {
   const [user, setUser] = useState(new Teacher());
-  const [courses, setCourses] = useState(user.courseload);
-  const [activeId, setActiveId] = useState();
+  const [cardIds, setCardIds] = useState(
+    user.courses.map( Course => Course.id )
+  );
 
   useEffect( 
     () => console.log(user), 
@@ -58,93 +59,68 @@ const App = () => {
     })
   );
 
-  const findContainer = courseId => {
-    if (courseId in courses) return courseId;
-    return Object.keys(courses).find(
-      key => courses[key].includes(courseId)
-    )
-  };
+  // const handleDragStart = ({ active }) => setActiveId(active.id);
+  // const handleDragOver = ({ active, over, draggingRect }) => {
+  //   let [ containerActive, containerOver ] = [
+  //     findContainer(active.id),
+  //     findContainer(over.id)
+  //   ];
 
-  const handleDragStart = ({ active }) => setActiveId(active.id);
-  const handleDragOver = ({ active, over, draggingRect }) => {
-    let { id } = active;
-    let { id: overId } = over;
-
-    let [ containerActive, containerOver ] = [
-      findContainer(id),
-      findContainer(overId)
-    ];
-
-    if (
-      !containerActive 
-      || !containerOver
-      || containerActive === containerOver
-    ) return;
+  //   if (
+  //     !containerActive 
+  //     || !containerOver
+  //     || containerActive === containerOver
+  //   ) return;
     
-    setCourses( prev => {
-      let [ coursesActive, coursesOver ] = [
-        prev[containerActive],
-        prev[containerOver]
-      ];
+  //   setCourses( prev => {
+  //     let [ coursesActive, coursesOver ] = [
+  //       prev[containerActive],
+  //       prev[containerOver]
+  //     ];
       
-      let [ iActive, iOver, iNew ] = [
-        coursesActive.indexOf(id),
-        coursesOver.indexOf(overId),
-        0
-      ];
+  //     let [ iActive, iOver, iNew ] = [
+  //       coursesActive.indexOf(active.id),
+  //       coursesOver.indexOf(over.id),
+  //       0
+  //     ];
       
-      if (iOver in prev) {
-        iNew = coursesOver.length + 1;
-      } else {
-        let isBelowLastItem = over
-        && (iOver === coursesOver.length - 1)
-        && (draggingRect.offsetTop > over.rect.offsetTop + over.rect.height);
-        let modifier = isBelowLastItem ? 1 : 0;
+  //     if (iOver in prev) {
+  //       iNew = coursesOver.length + 1;
+  //     } else {
+  //       let isBelowLastItem = over
+  //       && (iOver === coursesOver.length - 1)
+  //       && (draggingRect.offsetTop > over.rect.offsetTop + over.rect.height);
+  //       let modifier = isBelowLastItem ? 1 : 0;
         
-        iNew = iOver >= 0 ? iOver + modifier : coursesOver.length + 1;
-      }
+  //       iNew = iOver >= 0 ? iOver + modifier : coursesOver.length + 1;
+  //     }
       
-      return {
-        ...prev,
-        [containerActive]: [
-          ...prev[containerActive].filter( item => item !== active.id)
-        ],
-        [containerOver] : [
-          ...prev[containerOver].slice(0, iNew),
-          courses[containerActive][iActive],
-          ...prev[containerOver].slice(iNew, prev[containerOver].length)
-        ]
-      }
-    });
-  };
+  //     return {
+  //       ...prev,
+  //       [containerActive]: [
+  //         ...prev[containerActive].filter( item => item !== active.id)
+  //       ],
+  //       [containerOver] : [
+  //         ...prev[containerOver].slice(0, iNew),
+  //         courses[containerActive][iActive],
+  //         ...prev[containerOver].slice(iNew, prev[containerOver].length)
+  //       ]
+  //     }
+  //   });
+  // };
   const handleDragEnd = ({ active, over }) => {
-    let { id } = active;
-    let { id: overId } = over;
-    
-    let [ containerActive, containerOver ] = [
-      findContainer(id),
-      findContainer(overId)
-    ];
-    
-    if (
-      !containerActive 
-      || !containerOver
-      || containerActive === containerOver
-      ) return;
-      
-    let [ iActive, iOver ] = [
-      containerActive.indexOf(id),
-      containerOver.indexOf(overId)
-    ];
+    console.log(`active.id === ${active}\nover.id === ${over}`);
+    console.log(`active.id === ${active.id}\nover.id === ${over.id}`);
+    if (active.id !== over.id) {
+      setCardIds( () => {
+        let [iOld, iNew] = [
+          cardIds.indexOf(active.id),
+          cardIds.indexOf(over.id)
+        ];
 
-    if (iActive !== iOver) {
-      setCourses( items => ({
-        ...items,
-        [containerOver]: arrayMove(items[containerOver], iActive, iOver)
-      }));
-    };
-
-    setActiveId(null);
+        return arrayMove(cardIds, iOld, iNew)
+      });
+    }
   };
     
   return (
@@ -157,13 +133,14 @@ const App = () => {
         <DndContext
           collisionDetection={closestCorners}
           announcements={dragNarration}
-          onDragStart={handleDragStart}
-          onDragOver={handleDragOver}
+          // onDragStart={handleDragStart}
+          // onDragOver={handleDragOver}
           onDragEnd={handleDragEnd}
           sensors={sensors}
         >
           <Content 
             id="card-container"
+            cardIds={cardIds}
             courses={user.courses}
           />
         </DndContext>

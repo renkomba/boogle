@@ -13,7 +13,7 @@ export const Assignments = ({ assignments, totalStudents, minimised }) => {
                 {Object.values(assignments).map( assignment => {
                     let [id, type, title, submissions] = assignment;
                     return(
-                    <tr id={id} className="assignment">
+                    <tr key={id} id={id} className="assignment">
                         <td className="icon"><CompletionIcon rate={submissions / totalStudents} /></td>
                         <td className="type"><AssignmentType type={type} /></td>
                         <td className="title"><AssignmentTitle title={title} /></td>

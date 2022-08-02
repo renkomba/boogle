@@ -8,19 +8,19 @@ import {
 } from "@dnd-kit/sortable";
 import './Content.css';
 
-export const Content = ({ id, courses }) => {
+export const Content = ({ id, cardIds, courses }) => {
     const { setNodeRef } = useDroppable({ id });
-    const cardIds = [];
-    // debugger;
    
-    const generateCards = (courses, cards=[]) => {
-        for (let course of courses) {
-            cardIds.push(course.id);
-
-            cards.push(<Card 
-                key={course.id}
-                course={course} 
-            />);
+    const generateCards = (cards=[]) => {
+        for (let cardId of cardIds) {
+            for (let course of courses) {
+                if (course.id === cardId) {
+                    cards.push(<Card 
+                        key={cardId}
+                        course={course} 
+                    />);
+                }
+            }
         }
         return cards;
     };
@@ -30,7 +30,6 @@ export const Content = ({ id, courses }) => {
             <Sidebar />
             <SortableContext 
                 id={id}
-                // ids={cardIds}
                 items={cardIds}
                 strategy={verticalListSortingStrategy}
             >
@@ -38,7 +37,7 @@ export const Content = ({ id, courses }) => {
                     className="cards"
                     ref={setNodeRef}
                 >
-                    {generateCards(courses)}
+                    {generateCards()}
                 </article>
             </SortableContext>
         </article>

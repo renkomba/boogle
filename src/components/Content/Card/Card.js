@@ -7,16 +7,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
 export const Card = ({ course }) => {
-    let [minimised, setMinimised] = useState(false);
-    // useEffect(
-    //     () => {
-    //         console.log('minimised ===', minimised);
-    //         console.log(minimised ? `${course.title} is minimised`
-    //             : `${course.title} is maximised`);
-    //         // setMinimised(!minimised);
-    //     }, 
-    //     [minimised]
-    // );
+    let [minimised, setMinimised] = useState(true);
 
     const {
         attributes,
@@ -30,11 +21,6 @@ export const Card = ({ course }) => {
         transform: CSS.Transform.toString(transform),
         transition
     };
-    
-    // useEffect(
-    //     () => {console.log(minimised ? 'Maximising...' : 'Minimising...');},
-    //     [minimised]
-    // );
 
     return (
         <article 
