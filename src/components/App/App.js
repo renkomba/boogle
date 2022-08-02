@@ -109,8 +109,6 @@ const App = () => {
   //   });
   // };
   const handleDragEnd = ({ active, over }) => {
-    console.log(`active.id === ${active}\nover.id === ${over}`);
-    console.log(`active.id === ${active.id}\nover.id === ${over.id}`);
     if (active.id !== over.id) {
       setCardIds( () => {
         let [iOld, iNew] = [
