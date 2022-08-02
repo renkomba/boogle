@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './Card.css';
 import { MaximiseIcon } from "./MaximiseIcon/MaximiseIcon";
 import { CardHeader } from "./CardHeader/CardHeader"
@@ -6,15 +6,25 @@ import { Assignments } from "./Assignments/Assignments"
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-export const Card = ({ prep, prepPeriods, totalStudents, ...props }) => {
-    const [minimised, setMinimised] = useState(false);
+export const Card = ({ course }) => {
+    let [minimised, setMinimised] = useState(false);
+    // useEffect(
+    //     () => {
+    //         console.log('minimised ===', minimised);
+    //         console.log(minimised ? `${course.title} is minimised`
+    //             : `${course.title} is maximised`);
+    //         // setMinimised(!minimised);
+    //     }, 
+    //     [minimised]
+    // );
+
     const {
         attributes,
         listeners,
         setNodeRef,
         transform,
         transition
-    } = useSortable({id: props.id });
+    } = useSortable({id: course.id });
 
     const style = {
         transform: CSS.Transform.toString(transform),
@@ -27,17 +37,32 @@ export const Card = ({ prep, prepPeriods, totalStudents, ...props }) => {
     // );
 
     return (
-        <article ref={setNodeRef} className="card"
-            draggable='true' style={style}
-            {...attributes} {...listeners}>
-            <MaximiseIcon style={minimised ? {display: 'flex'} : {display: 'none'}} />
-
-            <CardHeader prep={prep} prepPeriods={prepPeriods} verticalHeader={!minimised}
-                minimised={minimised} setMinimised={setMinimised}
-                style={minimised ? {display: 'flex', padding: '.5rem', flex: '1 1 10rem'}
-                    : {display: '', padding: '3rem', flex: '0 1 10rem'}} />
-            
-            <Assignments totalStudents={totalStudents} minimised={minimised} />
+        <article 
+            ref={setNodeRef} 
+            id={course.id}
+            key={course.id}
+            className="card"
+            style={style}
+            {...attributes} 
+            {...listeners}
+        >
+            <MaximiseIcon 
+                style={minimised ? {display: 'flex'} : {display: 'none'}}
+            />
+            <CardHeader 
+                prep={course.title} 
+                prepPeriods={course.periods}
+                setMinimised={setMinimised}
+                minimised={minimised}
+                style={minimised ? 
+                    {display: 'flex', padding: '.5rem', flex: '1 1 10rem'}
+                    : {display: '', padding: '3rem', flex: '0 1 10rem'}}
+            />
+            <Assignments 
+                assignments={course.assignments}
+                totalStudents={course.totalStudents} 
+                minimised={minimised} 
+            />
         </article>
     );
 }

@@ -5,7 +5,7 @@ import { SidebarIcon } from "./SidebarIcon/SidebarIcon";
 export const Sidebar = props => {
     const [goRight, setGoRight] = useState(true);
     useEffect(() => {
-        console.log(`${goRight ? 'Open' : 'Close'} the sidebar, Krunk`);
+        console.log(`You can ${goRight ? 'open' : 'close'} the sidebar, Krunk`);
     },
     [goRight]);
 

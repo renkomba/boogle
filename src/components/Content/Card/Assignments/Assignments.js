@@ -1,34 +1,28 @@
 import React from "react";
-import { getRandomNum } from "../../../../hooks/getRandomNum";
-import { Assignment } from "./Assignment/Assignment";
+import { AssignmentCompletion } from "./Assignment/AssignmentCompletion/AssignmentCompletion";
+import { AssignmentTitle } from "./Assignment/AssignmentTitle/AssignmentTitle";
+import { AssignmentType } from "./Assignment/AssignmentType/AssignmentType";
+import { CompletionIcon } from "./Assignment/CompletionIcon/CompletionIcon";
 import './Assignments.css';
 
-export const Assignments = ({ totalStudents, minimised }) => {
-    const generateAssignments = (amount=5, totalStudents=30) => {
-        console.log('Generating assignments...');
-        let assignments = [];
-        for (let i = 0; i < amount; i++) {
-            assignments.push(<Assignment key={`${i}9a`}
-                assignmentId="test" 
-                totalStudents={totalStudents} />);
-        }
-    
-        return assignments;
-    }
-
+export const Assignments = ({ assignments, totalStudents, minimised }) => {
     return (
         <table className="assignments"
             style={minimised ? {display: 'none'} : {display: ''}}>
-            <thead>
-                <tr>
-                    <td>icon</td>
-                    <td>type</td>
-                    <td>title</td>
-                    <td>rate</td>
-                </tr>
-            </thead>
             <tbody>
-                {generateAssignments(getRandomNum(11, 1), totalStudents)}
+                {Object.values(assignments).map( assignment => {
+                    let [id, type, title, submissions] = assignment;
+                    return(
+                    <tr id={id} className="assignment">
+                        <td className="icon"><CompletionIcon rate={submissions / totalStudents} /></td>
+                        <td className="type"><AssignmentType type={type} /></td>
+                        <td className="title"><AssignmentTitle title={title} /></td>
+                        <td className="submissions"><AssignmentCompletion
+                            submissions={submissions}
+                            totalStudents={totalStudents}
+                        /></td>
+                    </tr>
+                )})}
             </tbody>
         </table>
     );
