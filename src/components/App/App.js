@@ -43,7 +43,10 @@ const App = () => {
   );
 
   useEffect( 
-    () => console.log(user), 
+    () => {
+      console.log(user);
+      setCardIds(user.courses.map( Course => Course.id ));
+    }, 
     [user.fullName]
   );
 
