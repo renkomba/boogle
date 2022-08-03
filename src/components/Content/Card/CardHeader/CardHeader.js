@@ -3,7 +3,7 @@ import { Prep } from "./Prep/Prep";
 import { PrepPeriod } from "./PrepPeriod/PrepPeriod";
 import './CardHeader.css';
 
-export const CardHeader = ({ prep, prepPeriods, minimised, setMinimised, ...props }) => {
+export const CardHeader = ({ prep, prepPeriods, minimised, setMinimised }) => {
     // minimised = minimised === false ? setMinimised(true) : setMinimised(false);
     const generatePeriods = periods => {
         return periods.map( period => <PrepPeriod 
@@ -15,18 +15,16 @@ export const CardHeader = ({ prep, prepPeriods, minimised, setMinimised, ...prop
     
     return (
         <header 
-            className="card-header"
-            style={props.style}
-            onClick={ () => {
-                setMinimised(!minimised);
-                console.log(`---minimised WAS ${!minimised} and now IS ${minimised}---`);
-            } }
+            className={`card-header${minimised ? ' minimised' : ' maximised'}`}
+            onClick={ () => setMinimised(!minimised) }
         >
             <Prep 
                 prep={prep} 
                 verticalHeader={!minimised} 
             />
-            {generatePeriods(prepPeriods)}
+            <div className="periods">
+                {generatePeriods(prepPeriods)}
+            </div>
         </header>
     );
 }
