@@ -2,6 +2,7 @@
     margin: 3rem 1.5rem;
     min-width: fit-content;
     font-size: clamp(.75rem 2.25vw 1.5rem);
+    flex-grow: 1;
 }
 
 .assignments .assignment:last-child {
@@ -13,6 +14,12 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     margin: .5rem 0 .75rem .5rem;
+}
+
+.icon,
+.type,
+.submissions {
+    width: fit-content;
 }
 
 .assignment .title,
