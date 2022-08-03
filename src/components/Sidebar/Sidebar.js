@@ -4,10 +4,6 @@ import { SidebarIcon } from "./SidebarIcon/SidebarIcon";
 
 export const Sidebar = () => {
     const [goRight, setGoRight] = useState(true);
-    useEffect(() => {
-        console.log(`You can ${goRight ? 'open' : 'close'} the sidebar, Krunk`);
-    },
-    [goRight]);
 
     // If user is teacher, show classes performance by class w/ expecation at top.
     // If student, show classes performance by class w/ their score under expectation
