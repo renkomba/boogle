@@ -40,9 +40,6 @@ export const Card = ({ course }) => {
                 prepPeriods={course.periods}
                 setMinimised={setMinimised}
                 minimised={minimised}
-                style={minimised ? 
-                    {display: 'flex', padding: '.5rem', flex: '1 1 10rem'}
-                    : {display: '', padding: '3rem', flex: '0 1 10rem'}}
             />
             <Assignments 
                 assignments={course.assignments}

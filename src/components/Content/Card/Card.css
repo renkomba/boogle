@@ -4,15 +4,15 @@
     font-size: 1.25rem;
     display: flex;
     margin: 2rem;
-    flex: 3 0 fit-content;
-    flex-flow: row wrap;
+    min-width: calc(100vw - 3rem - 4rem);
+    flex-flow: row nowrap;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
 }
 
-/* @media only screen and (max-width: 915px) {
+@media only screen and (max-width: 875px) {
     .card {
-        flex-flow: column nowrap;
+        flex-wrap: wrap;
     }
-} */
+}
