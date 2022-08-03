@@ -10,3 +10,17 @@
   display: grid;
   height: 100vh;
 }
+
+.App > header {
+  box-sizing: border-box;
+  height: 6rem;
+}
+
+.App > footer {
+  box-sizing: border-box;
+  height: 4rem;
+}
+
+.App #content {
+  height: calc(100vh - 10rem);
+}

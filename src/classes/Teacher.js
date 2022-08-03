@@ -1,6 +1,7 @@
 import { getOrdinalSuffix } from "../hooks/getOrdinalSuffix";
 import { getRandomNum } from "../hooks/getRandomNum";
 import { shuffleArray } from "../hooks/shuffleArray";
+import { Course } from "./Course";
 import { User } from "./User";
 
 export class Teacher extends User {
@@ -10,6 +11,7 @@ export class Teacher extends User {
         this.subject = subject === 'French' ? subject 
                 : subject[0].toUpperCase() + subject.slice(1).toLowerCase();
         this.courseload = this.getSchedule(this.subject);
+        this.courses = this.generateCourses(this.courseload);
     }
 
     get displayName() {
@@ -38,7 +40,7 @@ export class Teacher extends User {
         return this.getCourses(Object.values(preps))
     }
 
-    getCourses(prepValues=[], courses=['Planning', 'Planning']) {
+    getCourses(prepValues=[], courses=['Planning','Planning']) {
         prepValues.forEach( prep => courses.push(...prep) );
         shuffleArray(courses);
         courses.splice(3, 0, 'Advisory');
@@ -80,7 +82,19 @@ export class Teacher extends User {
 
     addCT(prepsObj={}) {
         for (let prep in prepsObj) {
+            if (prep === 'Planning') {
+                delete prepsObj[prep];
+                continue;
+            }
+
             prepsObj[prep].push('ct');
         }
+    }
+
+    generateCourses(courseload={}, courses=[]) {
+        for (let course in courseload) {
+            courses.push(new Course(course, courseload[course]));
+        }
+        return courses;
     }
 }

@@ -3,25 +3,49 @@ import './Card.css';
 import { MaximiseIcon } from "./MaximiseIcon/MaximiseIcon";
 import { CardHeader } from "./CardHeader/CardHeader"
 import { Assignments } from "./Assignments/Assignments"
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
-export const Card = ({ prep, prepPeriods, totalStudents }) => {
-    const [minimised, setMinimised] = useState(false);
-    
-    // useEffect(
-    //     () => {console.log(minimised ? 'Maximising...' : 'Minimising...');},
-    //     [minimised]
-    // );
+export const Card = ({ course }) => {
+    let [minimised, setMinimised] = useState(true);
+
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition
+    } = useSortable({id: course.id });
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition
+    };
 
     return (
-        <article className="card" draggable='true'>
-            <MaximiseIcon style={minimised ? {display: 'flex'} : {display: 'none'}} />
-
-            <CardHeader prep={prep} prepPeriods={prepPeriods} verticalHeader={!minimised}
-                minimised={minimised} setMinimised={setMinimised}
-                style={minimised ? {display: 'flex', padding: '.5rem', flex: '1 1 10rem'}
-                    : {display: '', padding: '3rem', flex: '0 1 10rem'}} />
-            
-            <Assignments totalStudents={totalStudents} minimised={minimised} />
+        <article 
+            ref={setNodeRef} 
+            id={course.id}
+            key={course.id}
+            className="card"
+            style={style}
+            {...attributes} 
+            {...listeners}
+        >
+            <MaximiseIcon 
+                style={minimised ? {display: 'flex'} : {display: 'none'}}
+            />
+            <CardHeader 
+                prep={course.title} 
+                prepPeriods={course.periods}
+                setMinimised={setMinimised}
+                minimised={minimised}
+            />
+            <Assignments 
+                assignments={course.assignments}
+                totalStudents={course.totalStudents} 
+                minimised={minimised} 
+            />
         </article>
     );
 }

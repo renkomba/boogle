@@ -1,8 +1,8 @@
 import React from "react";
 import './AssignmentTitle.css';
 
-export const AssignmentTitle = props => {
+export const AssignmentTitle = ({ title }) => {
     return (
-        <p className="assignment-title">{props.title}</p>
+        <p className="assignment-title">{title}</p>
     );
 }

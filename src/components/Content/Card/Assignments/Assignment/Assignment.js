@@ -61,7 +61,7 @@ export const Assignment = props => {
         <tr className="assignment">
             <td><CompletionIcon completionRate={submissions / totalStudents} /></td>
             <td><AssignmentType type={assignmentType} /></td>
-            <td><AssignmentTitle title={assignmentTitle} /></td>
+            <td><AssignmentTitle name={assignmentTitle} /></td>
             <td><AssignmentCompletion submissions={submissions} totalStudents={totalStudents} /></td>
         </tr>
     );

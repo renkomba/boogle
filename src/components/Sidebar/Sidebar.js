@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import './Sidebar.css';
 import { SidebarIcon } from "./SidebarIcon/SidebarIcon";
 
-export const Sidebar = props => {
+export const Sidebar = () => {
     const [goRight, setGoRight] = useState(true);
     useEffect(() => {
-        console.log(`${goRight ? 'Open' : 'Close'} the sidebar, Krunk`);
+        console.log(`You can ${goRight ? 'open' : 'close'} the sidebar, Krunk`);
     },
     [goRight]);
 
@@ -13,9 +13,12 @@ export const Sidebar = props => {
     // If student, show classes performance by class w/ their score under expectation
     return (
         <aside id="sidebar">
-            <div id="side-modal" 
-                style={goRight ? {width: '0vw'} : {color: 'var(--deep-colour)', width: 'calc(100vw - 3rem)'}}>
-                <table>
+            <div 
+                id="side-modal" 
+                style={goRight ? {width: '0vw'} 
+                    : {color: 'var(--deep-colour)', width: 'calc(100vw - 3rem)'}}
+            >
+                <table style={goRight ? {display: 'none'} : {display: 'block'}}>
                     <thead>
                         <tr>
                             <th colSpan="4">Student Progress</th>

@@ -5,6 +5,17 @@
     cursor: pointer;
     transition: .5s;
     align-items: center;
+    flex-grow: 1;
+}
+
+.maximised {
+    flex-basis: 10rem;
+}
+
+.minimised {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: .5rem;
 }
 
 /* ===== HOVER EFFECTS ===== */
@@ -13,7 +24,7 @@
     color: var(--light-header-colour);
 }
 
-.card header:hover > .prep-period {
+.card header:hover > .periods .prep-period {
     border-color: var(--light-header-colour);
 }
 
@@ -27,4 +38,12 @@
     position: relative;
     right: -.5rem;
     top: .25rem;
+}
+
+@media only screen and (max-width: 875px) {
+    .card-header.maximised {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 3.3rem;
+    }
 }
