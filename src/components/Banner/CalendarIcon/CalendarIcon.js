@@ -23,7 +23,7 @@ export const CalendarIcon = () => {
     return (
         <section id="date">
             <div id="date-container" title={`Today is ${weekday}, ${month} the ${day}${suffix}`}>
-                <span id="month">{month.length > 4 ? `${month.slice(0, 4)}.` : month}</span><br/>
+                <span id="month">{month.length > 4 ? `${month.slice(0, 3)}.` : month}</span><br/>
                 <span id="day">{day}</span>
                 <span id="ordinal-suffix"><sup>{suffix}</sup></span>
             </div>
