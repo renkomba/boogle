@@ -6,7 +6,7 @@ import { Assignments } from "./Assignments/Assignments"
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-export const Card = ({ course }) => {
+export const Card = ({ course, viewByPrep }) => {
     let [minimised, setMinimised] = useState(true);
 
     const {
@@ -37,7 +37,7 @@ export const Card = ({ course }) => {
             />
             <CardHeader 
                 prep={course.title} 
-                prepPeriods={course.periods}
+                prepPeriods={viewByPrep ? course.periods : [course]}
                 setMinimised={setMinimised}
                 minimised={minimised}
             />
