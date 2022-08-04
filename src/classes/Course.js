@@ -1,15 +1,23 @@
 import { getRandomNum } from "../hooks/getRandomNum";
+import { Period } from "./Period";
 
 export class Course {
     constructor(title='', periods=[]) {
         this.title = title;
-        this.periods = periods;
-        this.totalStudents = getRandomNum(35, 20);
         this.assignments = this.fetchAssignments();
+        this.periods = periods.map( period => new Period(title, this.id, period, this.assignments) );
+        this.totalStudents = this.periods.reduce( 
+            (runningTotal, Period) => runningTotal + Period.totalStudents,
+            0
+        );
     }
 
     get id() {
         return this.title.toLowerCase().split(' ').join('-');
+    }
+
+    get periodIds() {
+        return this.periods.map( Period => Period.id);
     }
 
     fetchStudentsArr() {
