@@ -12,6 +12,8 @@ export class Teacher extends User {
                 : subject[0].toUpperCase() + subject.slice(1).toLowerCase();
         this.courseload = this.getSchedule(this.subject);
         this.courses = this.generateCourses(this.courseload);
+        this.periods = this.getPeriods(this.courses);
+        this.periodIds = this.getPeriodIds(this.periods);
     }
 
     get displayName() {
@@ -26,6 +28,28 @@ export class Teacher extends User {
         return this.subject === 'French' ? 'Mme'
             : this.subject === 'Spanish' ? 'Sra.'
             : 'Ms.'
+    }
+
+    getPeriods(courses) {
+        let periods = {
+            cts: [],
+            nonCts: []
+        };
+
+        for (let course of courses) {
+            let nonCts = course.periods.slice(0);
+            let ct = nonCts.pop();
+
+            periods.cts.push(ct);
+            periods.nonCts.push(...nonCts);
+        }
+
+        return periods;
+    }
+
+    getPeriodIds(periods) {
+        let flatPeriods = periods.cts.concat(periods.nonCts);
+        return flatPeriods.map(Period => Period.id);
     }
 
     getSchedule(subject='French') {

@@ -38,13 +38,18 @@ const dragNarration = {
 
 const App = () => {
   const [user, setUser] = useState(new Teacher());
+  const [viewByPrep, setViewByPrep] = useState(true);
   const [cardIds, setCardIds] = useState(
     user.courses.map( Course => Course.id )
   );
 
   useEffect( 
-    () => console.log(user), 
-    [user.fullName]
+    () => {
+      console.log(user);
+      setCardIds(viewByPrep ? user.courses.map( Course => Course.id )
+        : user.periodIds);
+    }, 
+    [user.fullName, viewByPrep]
   );
 
   const UserContext = createContext();
@@ -127,6 +132,8 @@ const App = () => {
         <Banner 
           user={user} 
           setUser={setUser} 
+          viewByPrep={viewByPrep}
+          setViewByPrep={setViewByPrep}
         />
         <DndContext
           collisionDetection={closestCorners}
@@ -139,7 +146,8 @@ const App = () => {
           <Content 
             id="card-container"
             cardIds={cardIds}
-            courses={user.courses}
+            user={user}
+            viewByPrep={viewByPrep}
           />
         </DndContext>
         <Footer />
