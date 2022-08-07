@@ -1,6 +1,6 @@
-import { getRandomNum } from "../hooks/getRandomNum";
+import getRandomNum from "../components/functions/getRandomNum";
 
-export class Period {
+export default class Period {
     constructor(title='', courseId, period, assignments) {
         this.title = title;
         this.period = period;
