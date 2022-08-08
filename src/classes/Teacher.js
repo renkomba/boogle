@@ -1,10 +1,10 @@
-import { getOrdinalSuffix } from "../hooks/getOrdinalSuffix";
-import { getRandomNum } from "../hooks/getRandomNum";
-import { shuffleArray } from "../hooks/shuffleArray";
-import { Course } from "./Course";
-import { User } from "./User";
+import getOrdinalSuffix from "../components/functions/getOrdinalSuffix";
+import getRandomNum from "../components/functions/getRandomNum";
+import shuffleArray from "../components/functions/shuffleArray";
+import Course from "./Course";
+import User from "./User";
 
-export class Teacher extends User {
+export default class Teacher extends User {
     constructor(subject='French', level='High', school='Woodhouse') {
         super(level, school);
 
