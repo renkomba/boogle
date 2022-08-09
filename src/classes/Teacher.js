@@ -7,7 +7,6 @@ import User from "./User";
 export default class Teacher extends User {
     constructor(subject='French', level='High', school='Woodhouse') {
         super(level, school);
-
         this.subject = subject === 'French' ? subject 
                 : subject[0].toUpperCase() + subject.slice(1).toLowerCase();
         this.courseload = this.getSchedule(this.subject);
