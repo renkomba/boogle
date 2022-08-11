@@ -17,8 +17,8 @@ const AssignmentGroup = ({ sectionLabel, assignmentsObj, activePeriod }) => {
         for (let id in assignmentsObj) {
             let assignment = assignmentsObj[id];
             let icon = assignment.type + ' ' + icons[assignment.type];
-            console.log(sectionLabel);
-            
+            // console.log(sectionLabel);
+
             assignment.label === sectionLabel 
                 && assignmentBars.push( generateBar(icon, assignment) );
         }
