@@ -11,7 +11,7 @@ export const Assignments = ({ assignments, totalStudents, minimised }) => {
             style={minimised ? {display: 'none'} : {display: ''}}>
             <tbody>
                 {Object.values(assignments).map( assignment => {
-                    let [id, type, title, submissions] = assignment;
+                    let {id, type, title, submissions} = assignment;
                     return(
                     <tr key={id} id={id} className="assignment">
                         <td className="icon"><CompletionIcon rate={submissions / totalStudents} /></td>
