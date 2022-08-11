@@ -2,7 +2,7 @@ import React from "react";
 import { Logo } from '../Logo/Logo';
 import './Footer.css';
 
-export const Footer = () => {
+const Footer = () => {
     return (
         <footer>
             <Logo />
@@ -10,3 +10,5 @@ export const Footer = () => {
         </footer>
     );
 }
+
+export default Footer;
