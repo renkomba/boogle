@@ -6,7 +6,15 @@ const AssignmentBar = ({ icon, assignment, activePeriod }) => {
     return (
         <div className="bar">
             <i className={icon}></i>
-            <p className="title">{assignment.title}</p>
+            <p 
+                className="title"
+                contentEditable="true"
+                onBlur={ ({ currentTarget }) => {
+                    assignment.title = currentTarget.textContent;
+                }}
+            >
+                {assignment.title}
+            </p>
             { 
                 assignment.type !== 'resource'
                 && (submissionsObj.isCompleted ?
