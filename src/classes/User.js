@@ -1,6 +1,6 @@
-import { getRandomNum } from "../hooks/getRandomNum";
+import getRandomNum from "../components/functions/getRandomNum";
 
-export class User {
+export default class User {
     constructor(level='High', school='Woodhouse') {
         [ this.firstName, this.middleName, this.lastName ] = this.nameUser();
         [ this.level, this.school ] = arguments;

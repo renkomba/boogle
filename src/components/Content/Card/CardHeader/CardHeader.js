@@ -3,12 +3,14 @@ import { Prep } from "./Prep/Prep";
 import { PrepPeriod } from "./PrepPeriod/PrepPeriod";
 import './CardHeader.css';
 
-export const CardHeader = ({ prep, prepPeriods, minimised, setMinimised }) => {
+export const CardHeader = ({ prep, prepPeriods, minimised, setMinimised, setActivePeriod }) => {
     const generatePeriods = periods => {
         return periods.map( Period => <PrepPeriod 
                 key={`${Period.id}`} 
-                period={Period.period === 'ct' ? Period.period : Period.period[0]}
+                periodId={Period.period === 'ct' || Period.period === undefined ? Period.period : Period.period[0]}
+                period={Period}
                 minimised={minimised} 
+                setActivePeriod={setActivePeriod}
             />);
     }
     

@@ -1,5 +1,5 @@
 import React from "react";
-import { Teacher } from "../../../classes/Teacher";
+import Teacher from "../../../classes/Teacher";
 import './UserInfo.css';
 
 export const UserInfo = ({ user, setUser }) => {

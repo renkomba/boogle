@@ -1,10 +1,16 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 import './PrepPeriod.css';
 
-export const PrepPeriod = ({ period, minimised }) => {
-    period = period === 'ct' ? 'people-group' : period;
+export const PrepPeriod = ({ periodId, period, minimised, setActivePeriod }) => {
+    periodId = periodId === 'ct' ? 'people-group' : periodId;
 
     return (
-        <i className={`prep-period ${minimised ? 'small ' : ''}fa-solid fa-${period}`}></i>
+        <Link to={'../../../../../pages/CourseSite'} className="Link">
+            <i 
+                className={`prep-period ${minimised ? 'small ' : ''}fa-solid fa-${periodId}`}
+                onClick={ () => setActivePeriod(period) }
+            ></i>
+        </Link>
     );
 }

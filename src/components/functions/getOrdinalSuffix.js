@@ -1,4 +1,4 @@
-export const getOrdinalSuffix = (num=1) => {
+const getOrdinalSuffix = (num=1) => {
     num %= 10;
 
     return num > 3 ? 'th'
@@ -6,3 +6,5 @@ export const getOrdinalSuffix = (num=1) => {
         : num === 2 ? 'nd'
         : 'st'
 }
+
+export default getOrdinalSuffix;

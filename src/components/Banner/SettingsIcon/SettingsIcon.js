@@ -1,11 +1,11 @@
 import React from "react";
 import './SettingsIcon.css';
 
-export const SettingsIcon = ({ viewByPrep, setViewByPrep }) => {
+export const SettingsIcon = ({ toggle, setToggle }) => {
     return (
         <section 
             id="settings"
-            onClick={ () => setViewByPrep(!viewByPrep) }
+            onClick={ () => setToggle(!toggle) }
         >
             <i className="fa-solid fa-sliders"></i>
         </section>

@@ -1,5 +1,5 @@
 import React from "react";
-import { getOrdinalSuffix } from "../../../hooks/getOrdinalSuffix";
+import getOrdinalSuffix from "../../functions/getOrdinalSuffix";
 import './CalendarIcon.css';
 
 export const CalendarIcon = () => {
