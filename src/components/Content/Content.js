@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card } from "./Card/Card";
 import { Sidebar } from "../Sidebar/Sidebar";
+import CourseContent from "./CourseContent/CourseContent";
 import { useDroppable } from "@dnd-kit/core";
 import {
     rectSortingStrategy,
@@ -9,7 +10,9 @@ import {
 } from "@dnd-kit/sortable";
 import './Content.css';
 
-export const Content = ({ id, cardIds, user, viewByPrep }) => {
+export const Content = ({
+    id, cardIds, user, viewByPrep, page, activePage, activePeriod, setActivePeriod
+}) => {
     const { setNodeRef } = useDroppable({ id });
    
     const generateCards = (cards=[]) => {
@@ -26,6 +29,7 @@ export const Content = ({ id, cardIds, user, viewByPrep }) => {
                         key={cardId}
                         course={collective[i]} 
                         viewByPrep={viewByPrep}
+                        setActivePeriod={setActivePeriod}
                     />);
                     collective.splice(i, 1);  //remove element as it is no longer an option
                 }
@@ -49,7 +53,13 @@ export const Content = ({ id, cardIds, user, viewByPrep }) => {
                     className="cards"
                     ref={setNodeRef}
                 >
-                    {generateCards()}
+                    {page === 'Dashboard' ? generateCards()
+                        : <CourseContent
+                            user={user}
+                            viewByPrep={viewByPrep}
+                            activePeriod={activePeriod}
+                        />
+                    }
                 </article>
             </SortableContext>
         </article>
