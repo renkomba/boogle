@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Card } from "./Card/Card";
 import { Sidebar } from "../Sidebar/Sidebar";
 import CourseContent from "./CourseContent/CourseContent";
