@@ -4,7 +4,7 @@ import { UserInfo } from "./UserInfo/UserInfo";
 import { SettingsIcon } from "./SettingsIcon/SettingsIcon";
 import "./Banner.css";
 
-export const Banner = ({ user, setUser, viewByPrep, setViewByPrep }) => {
+const Banner = ({ user, setUser, toggle, setToggle }) => {
     return (
         <header id="banner">
             <CalendarIcon />
@@ -13,9 +13,11 @@ export const Banner = ({ user, setUser, viewByPrep, setViewByPrep }) => {
                 setUser={setUser} 
             />
             <SettingsIcon 
-                viewByPrep={viewByPrep}
-                setViewByPrep={setViewByPrep}
+                toggle={toggle}
+                setToggle={setToggle}
             />
         </header>
     );
 }
+
+export default Banner;
