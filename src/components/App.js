@@ -15,9 +15,6 @@ const App = () => {
   const [toggle, setToggle] = useState(true);
   const [activePeriod, setActivePeriod] = useState(user.periods.nonCts[0]);
   const [activePage, setActivePage] = useState('Dashboard');
-  console.log('App.js activePeriod:');
-  console.log(activePeriod);
-  // console.log(user.periods.nonCts);
 
   return (
     <div className="App">
