@@ -1,7 +1,13 @@
+@import '../../../App.css';
+
 .tabs {
     display: flex;
     flex-flow: column nowrap;
-    text-align: right;
+    align-items: center;
+}
+
+.tabs div.btn-group-vertical {
+    height: calc(100vh - 10rem);
 }
 
 .tabs p {
