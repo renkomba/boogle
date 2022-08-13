@@ -4,12 +4,13 @@ export default class Assignment {
     constructor(type, Course, ordinalNum) {
         this.type = type;
         this.course = Course;
-        this.title = this.getTitle(this.type);
+        this.title = ordinalNum === 1 ? `${this.course.title} Syllabus` 
+            : this.getTitle(this.type);
         this.ordinalNum = ordinalNum;
         this._submissions = 0;
         this.isCompleted = false;
         this.isInProgress = false;
-        this.label = this.getLabel();
+        this.label = ordinalNum === 1 ? 'Class Docs' : this.getLabel();
     }
 
     get id() {
