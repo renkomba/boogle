@@ -1,9 +1,9 @@
 import React from "react";
-import './MaximiseIcon.css';
+import styles from './MaximiseIcon.module.css';
 
 export const MaximiseIcon = ({ style }) => {
     return (
-        <div className="action-icon">
+        <div className={styles.action_icon}>
             <i className="fa-solid fa-maximize"
                 style={style}></i>
         </div>

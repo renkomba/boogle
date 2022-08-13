@@ -1,4 +1,6 @@
-.action-icon i {
+@import '../../../App.css';
+
+.action_icon i {
     /* display: none; */
     align-items: center;
     height: 100%;
