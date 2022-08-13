@@ -4,6 +4,13 @@ import Period from "./Period";
 
 export default class Course {
     constructor(title='', periods=[]) {
+        this._assignmentTypes = [
+            'resource',
+            'assignment',
+            'assessment',
+            'application'
+        ];
+
         this.title = title;
         this.assignments = this.fetchAssignments();
         this.periods = periods.map( 
@@ -14,6 +21,20 @@ export default class Course {
             (runningTotal, Period) => runningTotal + Period.totalStudents,
             0
         );
+    }
+
+    get assignmentTypes() {
+        return this._assignmentTypes;
+    }
+
+    get assignmentLabels() {
+        let labels = [];
+        for (let id in this.assignments) {
+            let assignment = this.assignments[id];
+            let label = assignment.label;
+            !labels.includes(label) && labels.push(label);
+        }
+        return labels;
     }
 
     get id() {
@@ -32,7 +53,7 @@ export default class Course {
     fetchAssignments() {
         const [ amount, assignments ] = [ getRandomNum(11, 3), {} ];
         for (let i = 0; i < amount; i++) {
-            let type = this.parseAssignment();
+            let type = i === 0 ? 'resource' : this.parseAssignment();
             let id = `${this.id}-task-#${i + 1}`;
             assignments[id] = new Assignment(type, this, i+1);
         }
@@ -40,7 +61,7 @@ export default class Course {
     }
 
     parseAssignment() {
-        const types = [ 'assignment', 'assessment', 'application', 'resource' ];
+        const types = this.assignmentTypes;
         const type = types[getRandomNum(types.length)];
         return type;
     }
