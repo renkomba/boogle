@@ -1,4 +1,6 @@
-.card-header {
+@import '../../../App.css';
+
+.card_header {
     text-align: center;
     background-color: var(--light-font-colour);
     padding: 3rem;
@@ -19,16 +21,16 @@
 }
 
 /* ===== HOVER EFFECTS ===== */
-.card header:hover {
+header.card_header:hover {
     background-color: var(--deep-colour);
     color: var(--light-header-colour);
 }
 
-.card header:hover > .periods .prep-period {
+header.card_header:hover > .periods .prep_period {
     border-color: var(--light-header-colour);
 }
 
-.card header:hover > .card .prep::after {
+header.card_header:hover > .card .prep::after {
     content: '';
     display: inline-block;
     margin: 0rem 1.5rem 0rem .5rem;
@@ -41,7 +43,7 @@
 }
 
 @media only screen and (max-width: 875px) {
-    .card-header.maximised {
+    .card_header.maximised {
         display: flex;
         justify-content: space-between;
         padding: 1rem 3.3rem;

@@ -1,4 +1,6 @@
-.prep-period {
+@import '../../../../App.css';
+
+.prep_period {
     border: 2px solid black;
     border-radius: 10px;
     margin: .25rem;
@@ -11,7 +13,7 @@
     transition: .5s;
 }
 
-.prep-period.small {
+.prep_period.small {
     font-size: 1rem;
     padding: calc( (2rem - .75rem) / 2) 0;
     width: 2.5rem;
@@ -19,7 +21,7 @@
 }
 
 /* ===== HOVER EFFECTS ===== */
-.prep-period:hover {
+.prep_period:hover {
     border-color: var(--light-header-colour);
     background-color: var(--light-font-colour);
     color: var(--deep-colour);
@@ -27,7 +29,7 @@
     padding: calc( (3rem - 1.25rem) / 2) 0;
 }
 
-.prep-period.small:hover {
+.prep_period.small:hover {
     border-color: var(--light-header-colour);
     background-color: var(--light-font-colour);
     color: var(--deep-colour);
@@ -36,14 +38,14 @@
 }
 
 @media only screen and (max-width: 875px) {
-    .prep-period {
+    .prep_period {
         font-size: 1rem;
         padding: calc( (2rem - .75rem) / 2) 0;
         width: 2.5rem;
         height: 2.5rem;
     }
 
-    .prep-period:hover {
+    .prep_period:hover {
         border-color: var(--light-header-colour);
         background-color: var(--light-font-colour);
         color: var(--deep-colour);

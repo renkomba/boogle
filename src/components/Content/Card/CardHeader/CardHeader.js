@@ -1,7 +1,7 @@
 import React from "react";
 import { Prep } from "./Prep/Prep";
 import { PrepPeriod } from "./PrepPeriod/PrepPeriod";
-import './CardHeader.css';
+import styles from './CardHeader.module.css';
 
 export const CardHeader = ({ prep, prepPeriods, minimised, setMinimised, setActivePeriod }) => {
     const generatePeriods = periods => {
@@ -16,14 +16,14 @@ export const CardHeader = ({ prep, prepPeriods, minimised, setMinimised, setActi
     
     return (
         <header 
-            className={`card-header${minimised ? ' minimised' : ' maximised'}`}
+            className={`${styles.card_header} ${minimised ? styles.minimised : styles.maximised}`}
             onClick={ () => setMinimised(!minimised) }
         >
             <Prep 
                 prep={prep} 
                 verticalHeader={!minimised} 
             />
-            <div className="periods">
+            <div className={styles.periods}>
                 {generatePeriods(prepPeriods)}
             </div>
         </header>
