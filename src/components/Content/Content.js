@@ -39,7 +39,7 @@ export const Content = ({
     };
 
     return (
-        <article id={styles.content}>
+        <article className={styles.content}>
             <Sidebar />
             <SortableContext 
                 id={id}
