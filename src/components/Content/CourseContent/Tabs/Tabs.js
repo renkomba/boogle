@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
-import './Tabs.css';
+import styles from './Tabs.module.css';
 
 const addToggle = (label='') => {
     return (
@@ -21,7 +21,7 @@ const Tabs = ({ labels }) => {
     }
 
     return (
-        <aside className="tabs">
+        <aside className={styles.tabs}>
             <ToggleButtonGroup
                 onChange={filterAssignmentGroups}
                 name="assignment-labels"

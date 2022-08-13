@@ -1,8 +1,8 @@
 import React from "react";
-import { AssignmentCompletion } from "./Assignment/AssignmentCompletion/AssignmentCompletion";
-import { AssignmentTitle } from "./Assignment/AssignmentTitle/AssignmentTitle";
-import { AssignmentType } from "./Assignment/AssignmentType/AssignmentType";
-import { CompletionIcon } from "./Assignment/CompletionIcon/CompletionIcon";
+import { AssignmentCompletion } from "./Assignment/AssignmentCompletion";
+import { AssignmentTitle } from "./Assignment/AssignmentTitle";
+import { AssignmentType } from "./Assignment/AssignmentType";
+import { CompletionIcon } from "./Assignment/CompletionIcon";
 import './Assignments.css';
 
 export const Assignments = ({ assignments, totalStudents, minimised }) => {
