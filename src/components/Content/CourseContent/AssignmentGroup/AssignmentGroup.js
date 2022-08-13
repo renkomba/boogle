@@ -1,7 +1,7 @@
 import React from "react";
 import AssignmentHeader from "./AssignmentHeader";
 import AssignmentBar from "./AssignmentBar";
-import './AssignmentGroup.css';
+import styles from './AssignmentGroup.module.css';
 
 const AssignmentGroup = ({ sectionLabel, assignmentsObj, activePeriod }) => {
     const icons = {
@@ -17,7 +17,6 @@ const AssignmentGroup = ({ sectionLabel, assignmentsObj, activePeriod }) => {
         for (let id in assignmentsObj) {
             let assignment = assignmentsObj[id];
             let icon = assignment.type + ' ' + icons[assignment.type];
-            // console.log(sectionLabel);
 
             assignment.label === sectionLabel 
                 && assignmentBars.push( generateBar(icon, assignment) );
@@ -36,9 +35,9 @@ const AssignmentGroup = ({ sectionLabel, assignmentsObj, activePeriod }) => {
     };
 
     return (
-        <section className="group">
+        <section className={styles.group}>
             <AssignmentHeader sectionLabel={sectionLabel} />
-            <article className="bars">
+            <article className={styles.bars}>
                 {populateAssignments()}
             </article>
         </section>
