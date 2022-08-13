@@ -1,4 +1,6 @@
-.sidebar-icon {
+@import '../../App.css';
+
+.sidebar_icon {
     text-align: right;
     /* padding: .5rem; */
 }

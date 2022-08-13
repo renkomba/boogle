@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import './Sidebar.css';
-import { SidebarIcon } from "./SidebarIcon/SidebarIcon";
+import styles from './Sidebar.module.css';
+import SidebarIcon from "./SidebarIcon/SidebarIcon";
 
 export const Sidebar = () => {
     const [goRight, setGoRight] = useState(true);
@@ -8,9 +8,9 @@ export const Sidebar = () => {
     // If user is teacher, show classes performance by class w/ expecation at top.
     // If student, show classes performance by class w/ their score under expectation
     return (
-        <aside id="sidebar">
+        <aside className={styles.sidebar}>
             <div 
-                id="side-modal" 
+                className={styles.side_modal}
                 style={goRight ? {width: '0vw'} 
                     : {color: 'var(--deep-colour)', width: 'calc(100vw - 3rem)'}}
             >
@@ -36,7 +36,7 @@ export const Sidebar = () => {
                     </tbody>
                 </table>
             </div>
-            <div id="bar"
+            <div className={styles.bar_with_caret}
                 onClick={() => setGoRight(!goRight)}>
                 <SidebarIcon goRight={goRight} />
             </div>
