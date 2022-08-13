@@ -1,25 +1,36 @@
-import React from "react";
-import './AssignmentBar.css';
+import React, { useState } from "react";
+import AssignmentModal from "../../../Modal/AssignmentModal";
+import styles from './AssignmentBar.module.css';
 
 const AssignmentBar = ({ icon, assignment, activePeriod }) => {
-    let submissionsObj = activePeriod.submissions[assignment.id]
+    const [show, setShow] = useState(false);
+
+    let [ submissionsObj, iconJsx ] = [
+        activePeriod.submissions[assignment.id],
+        <i className={icon}></i>
+    ];
+
     return (
-        <div className="bar">
-            <i className={icon}></i>
+        <div className={styles.bar}>
+            {iconJsx}
             <p 
-                className="title"
-                contentEditable="true"
-                onBlur={ ({ currentTarget }) => {
-                    assignment.title = currentTarget.textContent;
-                }}
+                className={styles.title}
+                onClick={ () => setShow(true) }
             >
                 {assignment.title}
             </p>
+            <AssignmentModal
+                show={show}
+                setShow={setShow}
+                iconJsx={iconJsx}
+                assignment={assignment}
+                activePeriod={activePeriod}
+            />
             { 
                 assignment.type !== 'resource'
                 && (submissionsObj.isCompleted ?
                 <i className="fa-solid fa-check"></i>
-                : <p className="submissions">
+                : <p className={styles.submissions}>
                     {submissionsObj.turnedIn}
                     &nbsp;/&nbsp;
                     {activePeriod.totalStudents}
