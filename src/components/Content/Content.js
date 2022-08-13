@@ -8,7 +8,7 @@ import {
     SortableContext,
     verticalListSortingStrategy
 } from "@dnd-kit/sortable";
-import './Content.css';
+import styles from './Content.module.css';
 
 export const Content = ({
     id, cardIds, user, viewByPrep, page, activePage, activePeriod, setActivePeriod
@@ -39,7 +39,7 @@ export const Content = ({
     };
 
     return (
-        <article id="content">
+        <article id={styles.content}>
             <Sidebar />
             <SortableContext 
                 id={id}
@@ -50,7 +50,7 @@ export const Content = ({
                 }
             >
                 <article 
-                    className="cards"
+                    className={styles.cards}
                     ref={setNodeRef}
                 >
                     {page === 'Dashboard' ? generateCards()
