@@ -1,7 +1,8 @@
 import React from "react";
+import Button from "react-bootstrap/Button"
 import AssignmentGroup from "./AssignmentGroup/AssignmentGroup";
 import Tabs from "./Tabs/Tabs";
-import './CourseContent.css';
+import styles from './CourseContent.module.css';
 
 const CourseContent = ({ user, viewByWeek, activePeriod }) => {
     const generateGroups = (labels=['SECTION']) => {
@@ -20,38 +21,45 @@ const CourseContent = ({ user, viewByWeek, activePeriod }) => {
         return arr;
     };
 
-    const pullLabels = () => {
-        let arr = ['Class Docs'];
-
-        for (let id in activePeriod.assignments) {
-            let assignment = activePeriod.assignments[id];
-            !arr.includes(assignment.label) && arr.push(assignment.label);
-        }
-        return arr;
-    }
-
     return (
-        <article className="course-content" >
-            <Tabs labels={pullLabels()} />
+        <article className={styles.course_content}>
+            <Tabs labels={activePeriod.course.assignmentLabels} />
             <article>
-                <section className="buttons">
-                    <button>
+                <section className={styles.buttons}>
+                    <Button 
+                        size="lg"
+                        type="button"
+                        className="secondary"
+                        active
+                    >
                         <i className="fa-solid fa-file-circle-plus">
                             <span>ADD RESOURCE</span>
                         </i>
-                    </button>
-                    <button>
+                    </Button>
+                    <Button 
+                        size="lg"
+                        type="button"
+                        className="primary"
+                        active
+                    >
                         <i className="fa-solid fa-plus">
                             <span className='work'>ADD WORK</span>
                         </i>
-                    </button>
-                    <button>
+                    </Button>
+                    <Button 
+                        size="lg"
+                        type="button"
+                        className="secondary"
+                        active
+                    >
                         <i className="fa-solid fa-bullhorn">
                             <span>ADD ANNOUNCEMENT</span>
                         </i>
-                    </button>
+                    </Button>
                 </section>
-                {generateGroups(pullLabels())}
+                <section className="assignments-and-labels">
+                    {generateGroups(activePeriod.course.assignmentLabels)}
+                </section>
             </article>
         </article>
     );
