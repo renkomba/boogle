@@ -27,14 +27,14 @@ const AssignmentBar = ({ icon, assignment, activePeriod }) => {
                 activePeriod={activePeriod}
             />
             { 
-                assignment.type !== 'resource'
+                !['resource', 'site'].includes(assignment.type)
                 && (submissionsObj.isCompleted ?
-                <i className="fa-solid fa-check"></i>
-                : <p className={styles.submissions}>
-                    {submissionsObj.turnedIn}
-                    &nbsp;/&nbsp;
-                    {activePeriod.totalStudents}
-                </p>)
+                    <i className="fa-solid fa-check"></i>
+                    : <p className={styles.submissions}>
+                        {submissionsObj.turnedIn}
+                        &nbsp;/&nbsp;
+                        {activePeriod.totalStudents}
+                    </p>)
             }
         </div>
     );
