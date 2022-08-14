@@ -3,7 +3,7 @@ import Assignment from "./Assignment";
 import Period from "./Period";
 
 export default class Course {
-    constructor(title='', periods=[]) {
+    constructor(title='', periods=[], user) {
         this._assignmentTypes = [
             'resource',
             'assignment',
@@ -11,6 +11,7 @@ export default class Course {
             'application'
         ];
 
+        this.user = user;
         this.title = title;
         this.assignments = this.fetchAssignments();
         this.periods = periods.map( 
