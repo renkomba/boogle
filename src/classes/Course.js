@@ -56,7 +56,10 @@ export default class Course {
     fetchAssignments() {
         const [ amount, assignments ] = [ getRandomNum(11, 3), {} ];
         for (let i = 0; i < amount; i++) {
-            let type = i === 0 ? 'resource' : this.parseAssignment();
+            let type = i === 0 ? this.assignmentTypes[0]
+                : i === 1 && this.title !== 'Advisory' ? 
+                this.assignmentTypes[4] : this.parseAssignment();
+                
             let id = `${this.id}-task-#${i + 1}`;
 
             assignments[id] = new Assignment(type, this, i+1);
