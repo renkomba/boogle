@@ -8,7 +8,9 @@ export default class Course {
             'resource',
             'assignment',
             'assessment',
-            'application'
+            'application',
+            'site',
+            'link'
         ];
 
         this.user = user;
@@ -56,13 +58,34 @@ export default class Course {
         for (let i = 0; i < amount; i++) {
             let type = i === 0 ? 'resource' : this.parseAssignment();
             let id = `${this.id}-task-#${i + 1}`;
+
             assignments[id] = new Assignment(type, this, i+1);
+
+            // arr of Assignments that are "sites" with the title
+            // of the recently-added (this) Assignment
+            let sites = Object.values(assignments)
+                .filter(Assignment => 
+                    Assignment.type === 'site' 
+                        && Assignment.title === assignments[id].title
+                );
+            
+            // If this Assignment is a duplicate, delete it
+            // and decrement i so we can redo
+            if (sites.length > 1) {
+                delete assignments[id];
+                i--;
+            }
         }
         return assignments
     }
 
+    // randomly select assignment from among the list of types
+    // except for the last entry (link) because I don't want to
+    // create a placeholder array for those
     parseAssignment() {
-        const types = this.assignmentTypes;
+        const types = this.assignmentTypes.slice(0);
+        types.pop();
+
         const type = types[getRandomNum(types.length)];
         return type;
     }
