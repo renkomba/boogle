@@ -8,7 +8,9 @@ const AssignmentGroup = ({ sectionLabel, assignmentsObj, activePeriod }) => {
         assignment: 'fa-solid fa-file-lines',
         assessment: 'fa-solid fa-file-lines',
         application: 'fa-solid fa-file-lines',
-        resource: 'fa-regular fa-clipboard'
+        resource: 'fa-regular fa-clipboard',
+        site: 'fa-solid fa-globe',
+        link: 'fa-solid fa-link'
     };
 
     const populateAssignments = () => {
