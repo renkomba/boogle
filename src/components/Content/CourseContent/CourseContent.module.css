@@ -1,11 +1,16 @@
 @import '../../App.css';
 
-.course-content {
+.course_content {
     display: grid;
     grid-auto-flow: column;
     height: 100%;
     overflow: scroll;
     grid-template-columns: max-content;
+}
+
+.buttonsAndAssignments {
+    margin-left: 2em;
+    margin-right: 4em;
 }
 
 .buttons {
@@ -15,45 +20,45 @@
     flex-wrap: nowrap;
 }
 
-.btn {
+.button {
     margin: 1.5em 1.5em 1em;
     height: 3em;
     padding: 1em 1.5em;
     font-size: 1em;
 }
 
-.course-content .btn.primary {
+.course_content button.primaryBtn {
     background-color: var(--light-deep-colour);
     border-color: var(--light-deep-colour);
 }
 
-.course-content .btn.primary:hover {
+.course_content button.primaryBtn:hover {
     background-color: var(--deep-colour);
 }
 
-.course-content .btn.primary:focus {
+.course_content button.primaryBtn:focus {
     box-shadow: 0px 10px 15px var(--light-deep-colour);
 }
 
-.course-content .btn.secondary {
+.course_content button.secondaryBtn {
     background-color: var(--dark-header-colour);
     border-color: var(--dark-header-colour);
 }
 
-.course-content .btn.secondary:hover {
+.course_content button.secondaryBtn:hover {
     background-color: grey;
 }
 
-.course-content .btn.secondary:focus {
+.course_content button.secondaryBtn:focus {
     box-shadow: 0px 10px 15px var(--light-deep-colour);
 }
 
-.btn span:not(.work) {
+.button span:not(.work) {
     display: none;
     transition: .3s;
 }
 
-.btn span {
+.button span {
     margin-left: .5rem;
 }
 

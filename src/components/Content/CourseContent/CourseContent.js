@@ -23,13 +23,13 @@ const CourseContent = ({ user, viewByWeek, activePeriod }) => {
 
     return (
         <article className={styles.course_content}>
-            <Tabs labels={activePeriod.course.assignmentLabels} />
-            <article>
+            <Tabs activePeriod={activePeriod} />
+            <article className={styles.buttonsAndAssignments}>
                 <section className={styles.buttons}>
                     <Button 
                         size="lg"
                         type="button"
-                        className="secondary"
+                        className={`${styles.button} ${styles.secondaryBtn}`}
                         active
                     >
                         <i className="fa-solid fa-file-circle-plus">
@@ -39,17 +39,17 @@ const CourseContent = ({ user, viewByWeek, activePeriod }) => {
                     <Button 
                         size="lg"
                         type="button"
-                        className="primary"
+                        className={`${styles.button} ${styles.primaryBtn}`}
                         active
                     >
                         <i className="fa-solid fa-plus">
-                            <span className='work'>ADD WORK</span>
+                            <span className={styles.work}>ADD WORK</span>
                         </i>
                     </Button>
                     <Button 
                         size="lg"
                         type="button"
-                        className="secondary"
+                        className={`${styles.button} ${styles.secondaryBtn}`}
                         active
                     >
                         <i className="fa-solid fa-bullhorn">
