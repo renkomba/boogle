@@ -6,8 +6,8 @@
     align-items: center;
 }
 
-.tabs div.btn-group-vertical {
-    height: calc(100vh - 10rem);
+.tabs div.verticalButtonGroup {
+    width: 7.5em;
 }
 
 .tabs p {
@@ -20,18 +20,14 @@
     margin: 0;
 }
 
-.tab:not(.add) {
-    background-color: aqua;
-    border: 2px solid blue;
-    flex-grow: 1;
-    position: relative;
-    left: -50px;
+.tab:not(.add),
+.allLabels {
+    background-color: var(--light-deep-colour);
+    border-color: var(--light-deep-colour);
 }
 
 .add {
     cursor: pointer;
     background-color: rgb(24, 167, 167);
     border: 2px solid rgb(32, 32, 145);
-    position: relative;
-    left: -50px;
 }
