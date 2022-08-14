@@ -99,8 +99,6 @@ export default class Assignment {
     }
     
     getAdvisoryTitle(label) {
-        console.log(label);
-
         const titles = {
             Forms: ['Impact Aid', 'Course Selection', 'Tutoring', 'Activities Permission'],
             Surveys: ['Mental Health', 'Club Interest', 'Spirit Week', 'Guest Speaker', 'Club Discussion', 'Heritage Month Event', 'School Climate'],
