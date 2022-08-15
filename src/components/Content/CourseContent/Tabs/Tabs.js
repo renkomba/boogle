@@ -16,16 +16,22 @@ const addToggle = (label='') => {
 
 const Tabs = ({ activePeriod }) => {
     const [tabs, setTabs] = useState(
-        activePeriod.course.assignmentLabels.map(
-            label => addToggle(label) 
-        )
+        activePeriod.course.assignmentLabels.sort(
+            (currentWord, previousWord) =>
+                previousWord === 'Class Docs' ? 1
+                    : currentWord.localeCompare(previousWord)
+        ).map( label => addToggle(label) )
     );
 
     useEffect(
         () => {
-            setTabs(activePeriod.course.assignmentLabels.map(
-                label => addToggle(label)
-            ));
+            setTabs(
+                activePeriod.course.assignmentLabels.sort(
+                    (currentWord, previousWord) => 
+                        previousWord === 'Class Docs' ? 1
+                            : currentWord.localeCompare(previousWord)
+                ).map( label => addToggle(label) )
+            );
         },
         [activePeriod]
     );
