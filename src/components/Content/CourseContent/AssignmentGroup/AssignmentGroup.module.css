@@ -3,4 +3,8 @@
 .group {
     margin-bottom: 4em;
     width: auto;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
 }
