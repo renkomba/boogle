@@ -1,6 +1,6 @@
 @import '../../../App.css';
 
-.section-header {
+.section_header {
     border-bottom: 2px solid var(--deep-colour);
     padding: 1em .75em 1em 0em;
 }
