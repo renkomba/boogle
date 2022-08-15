@@ -5,7 +5,8 @@ import {
     KeyboardSensor, 
     PointerSensor, 
     useSensor, 
-    useSensors } from '@dnd-kit/core';
+    useSensors 
+} from '@dnd-kit/core';
 import { 
     arrayMove, 
     sortableKeyboardCoordinates 
@@ -62,7 +63,6 @@ const Dashboard = ({ user, toggle, activePage, setActivePage, activePeriod, setA
                     cardIds={cardIds}
                     user={user}
                     viewByPrep={toggle}
-                    page='Dashboard'
                     activePage={activePage}
                     setActivePage={setActivePage}
                     activePeriod={activePeriod}
