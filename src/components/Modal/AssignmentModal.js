@@ -68,7 +68,6 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
                         label="Assignment Title"
                     >
                         <Form.Control
-                            md
                             autoFocus
                             size="lg"
                             type="text"
@@ -83,7 +82,7 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
                     <Row className="type-and-label">
                         <FloatingLabel
                             as={Col}
-                            md
+                            size="md"
                             className="modal-type"
                             controlId="assignmentType"
                             label="Assignment Type"
@@ -109,7 +108,7 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
 
                         <FloatingLabel
                             as={Col}
-                            md
+                            size="md"
                             className="modal-label"
                             controlId="assignmentLabel"
                             label="Assignment Label"
@@ -170,7 +169,7 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
                             <Col>
                                 {isForLink ? <FloatingLabel
                                     as={Col}
-                                    md
+                                    size="md"
                                     label="Type / Paste link"
                                 >
                                     <Form.Control type="textarea" aria-label="text input for link"/>
