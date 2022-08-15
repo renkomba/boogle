@@ -4,8 +4,10 @@
     display: grid;
     grid-auto-flow: column;
     height: 100%;
+    width: 100vw;
     overflow: scroll;
     grid-template-columns: max-content;
+    flex-grow: 1;
 }
 
 .buttonsAndAssignments {
