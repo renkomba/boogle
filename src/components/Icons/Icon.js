@@ -9,7 +9,7 @@ const Icon = ({ type, suffix }) => {
     let faIcon = prefix + 'fa-' + suffix;
 
     return (
-        <i className={`icon ${faIcon}`}></i>
+        <i className={`${styles.icon} ${faIcon}`}></i>
     );
 }
 
