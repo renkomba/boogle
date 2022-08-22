@@ -1,0 +1,26 @@
+@import '../App.css';
+
+.overlay {
+    display: flex;
+    align-items: center;
+    background-color: var(--dark-header-colour);
+    color: white;
+    opacity: .75;
+    width: fit-content;
+    padding: .25em .5em;
+    border-radius: 10px;
+    cursor: grabbing;
+    box-shadow: rgb(200, 192, 192) 0px 0px 0px 2px inset, 
+        rgb(255, 255, 255) 10px -10px 10px -10px, 
+        rgb(190, 183, 183) 5px 5px, 
+        rgb(255, 255, 255) 20px -20px 10px -10px, 
+        rgb(228, 226, 226) 10px 10px;
+}
+
+.overlay > h3 {
+    margin: 0 .25em 0 0;
+}
+
+.visually_hidden {
+    display: none;
+}
