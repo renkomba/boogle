@@ -1,0 +1,11 @@
+@import '../../App.css';
+
+.section_header {
+    border-bottom: 2px solid var(--deep-colour);
+    padding: 1em .75em 0em 0em;
+}
+
+h2 {
+    padding: 0;
+    margin: 0;
+}

@@ -1,0 +1,101 @@
+@import '../../App.css';
+
+.tabs {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    color: black;
+}
+
+.tabs .allLabels,
+.tabs .add,
+.tabs .tab {
+    background-color: transparent;
+    color: black;
+    border: none;
+    font-size: 1.05rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    transition: .3s ease-in-out;
+    text-align: left;
+}
+
+.tabs .allLabels:hover,
+.tabs .add:hover,
+.tabs .tab:hover {
+    /* background-color: grey; */
+    background-color: white;
+    color: black;
+    /* color: white; */
+    /* box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset; */
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
+
+.tabs .allLabels:active,
+.tabs .add:active,
+.tabs .tab:active {
+    background-color: var(--deep-colour);
+    color: white;
+}
+
+.tabs .allLabels:focus-visible,
+.tabs .add:focus-visible,
+.tabs .tab:focus-visible {
+    outline: var(--deep-colour) solid 2px;
+}
+
+.tabs .allLabels:focus,
+.tabs .add:focus,
+.tabs .tab:focus {
+    /* background-color: var(--deep-colour); */
+    background-color: white;
+    color: black;
+    /* color: white; */
+    /* box-shadow: 0 5px 20px grey; */
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.tabs .allLabels:active,
+.tabs .add:active,
+.tabs .tab:active {
+    /* background-color: var(--deep-colour); */
+    background-color: white;
+    color: black;
+    /* color: white; */
+    /* box-shadow: 0 5px 20px grey; */
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+}
+
+.btn-check:focus + .tabs .tab {
+    background-color: var(--deep-colour);
+    color: white;
+    box-shadow: 0 5px 20px red;
+}
+
+.tabs .allLabels,
+.tabs .add {
+    background-color: var(--light-font-colour);
+    text-align: center;
+}
+
+.tabs .allLabels,
+.tabs .tab {
+    margin-bottom: .75em;
+}
+
+.tabs div.verticalButtonGroup {
+    width: 8em;
+}
+
+.tab:not(.add),
+.allLabels {
+    /* background-color: var(--light-deep-colour); */
+    border-color: var(--light-deep-colour);
+}
+
+.add {
+    cursor: pointer;
+    background-color: rgb(24, 167, 167);
+    border: 2px solid rgb(32, 32, 145);
+}
