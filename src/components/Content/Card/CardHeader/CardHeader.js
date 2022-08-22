@@ -1,16 +1,14 @@
 import React from "react";
-import { Prep } from "./Prep/Prep";
-import { PrepPeriod } from "./PrepPeriod/PrepPeriod";
+import Prep from "./Prep/Prep";
+import PrepPeriod from "./PrepPeriod/PrepPeriod";
 import styles from './CardHeader.module.css';
 
-export const CardHeader = ({ prep, prepPeriods, minimised, setMinimised, setActivePeriod }) => {
+const CardHeader = ({ prep, prepPeriods, minimised, setMinimised }) => {
     const generatePeriods = periods => {
         return periods.map( Period => <PrepPeriod 
                 key={`${Period.id}`} 
-                periodId={Period.period === 'ct' || Period.period === undefined ? Period.period : Period.period[0]}
                 period={Period}
-                minimised={minimised} 
-                setActivePeriod={setActivePeriod}
+                minimised={minimised}
             />);
     }
     
@@ -29,3 +27,5 @@ export const CardHeader = ({ prep, prepPeriods, minimised, setMinimised, setActi
         </header>
     );
 }
+
+export default CardHeader;
