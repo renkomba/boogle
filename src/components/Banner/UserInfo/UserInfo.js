@@ -1,12 +1,15 @@
-import React from "react";
-import Teacher from "../../../classes/Teacher";
-import './UserInfo.css';
+import React, { useContext } from "react";
+import UserContext from "../../../contexts/userContext";
+import styles from './UserInfo.module.css';
 
-export const UserInfo = ({ user, setUser }) => {
+const UserInfo = () => {
+    const { user, changeUser } = useContext(UserContext);
+    
     return (
-        <section id="user">
+        <section className={styles.user}>
             <i className="fa-solid fa-circle-user"
-                onClick={() => setUser(new Teacher())}></i>
+                onClick={changeUser}
+            ></i>
             <p>
                 <span id="name">{user.displayName}</span>
                 <br/><span id="title">{user.jobTitle}</span>
@@ -15,3 +18,5 @@ export const UserInfo = ({ user, setUser }) => {
         </section>
     );
 }
+
+export default UserInfo;
