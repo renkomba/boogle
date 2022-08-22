@@ -1,6 +1,6 @@
 import React from "react";
 import getOrdinalSuffix from "../../functions/getOrdinalSuffix";
-import './CalendarIcon.css';
+import styles from './CalendarIcon.module.css';
 
 const CalendarIcon = () => {
     let [ today, months, days ] = [
@@ -25,15 +25,17 @@ const CalendarIcon = () => {
     let suffix = getOrdinalSuffix(day);
 
     return (
-        <section id="date">
-            <div id="date-container" 
+        <section className={styles.date}>
+            <div className={styles.date_container} 
                 title={`Today is ${weekday}, ${month} the ${day}${suffix}`}
             >
-                <span id="month">
+                <span className={styles.month}>
                     {month.length > 4 ? `${month.slice(0, 3)}.` : month}
                 </span><br/>
-                <span id="day">{day}</span>
-                <span id="ordinal-suffix"><sup>{suffix}</sup></span>
+                <span className={styles.day}>{day}</span>
+                <span className={styles.ordinal_suffix}>
+                    <sup>{suffix}</sup>
+                </span>
             </div>
         </section>
     );

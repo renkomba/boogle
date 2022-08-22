@@ -1,15 +1,17 @@
-#date-container {
+@import '../../App.css';
+
+.date_container {
     border: 2px solid var(--light-font-colour);
     width: fit-content;
     text-align: center;
 }
 
-#month {
+.month {
     background-color: var(--light-font-colour);
     color: black;
     padding: 0 .5rem;
 }
 
-#day {
+.day {
     font-size: 2rem;
 }
