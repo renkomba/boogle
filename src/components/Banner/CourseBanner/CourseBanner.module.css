@@ -1,0 +1,36 @@
+@import '../../App.css';
+
+.course_banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem 10rem;
+    color: var(--light-font-colour);
+    background-color: var(--deep-colour);
+    height: 4rem;
+}
+
+.course_banner i {
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.course_banner .Link {
+    margin: 0 3em;
+}
+
+.course_banner h1,
+.course_banner p {
+    margin: 0;
+}
+
+.course_banner p {
+    font-size: 1.25em;
+    font-style: italic;
+}
+
+.Link {
+    color: inherit;
+    text-decoration: none;
+}
