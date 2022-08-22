@@ -1,10 +1,9 @@
 import React from "react";
-import './SettingsIcon.css';
+import styles from './SettingsIcon.module.css';
 
 export const SettingsIcon = ({ toggle, setToggle }) => {
     return (
-        <section 
-            id="settings"
+        <section className={styles.settings}
             onClick={ () => setToggle(!toggle) }
         >
             <i className="fa-solid fa-sliders"></i>
