@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import styles from './Card.module.css';
-import { MaximiseIcon } from "./MaximiseIcon/MaximiseIcon";
-import { CardHeader } from "./CardHeader/CardHeader"
-import { Assignments } from "./Assignments/Assignments"
+import MaximiseIcon from "./MaximiseIcon/MaximiseIcon";
+import CardHeader from "./CardHeader/CardHeader"
+import Assignments from "./Assignments/Assignments"
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-export const Card = ({ course, viewByPrep, setActivePeriod }) => {
+const Card = ({ course, viewByPrep }) => {
     let [minimised, setMinimised] = useState(true);
 
     const {
@@ -23,11 +23,10 @@ export const Card = ({ course, viewByPrep, setActivePeriod }) => {
     };
 
     return (
-        <article 
+        <article className={styles.card}
             ref={setNodeRef} 
             id={course.id}
             key={course.id}
-            className={styles.card}
             style={style}
             {...attributes} 
             {...listeners}
@@ -40,7 +39,6 @@ export const Card = ({ course, viewByPrep, setActivePeriod }) => {
                 prepPeriods={viewByPrep ? course.periods : [course]}
                 setMinimised={setMinimised}
                 minimised={minimised}
-                setActivePeriod={setActivePeriod}
             />
             <Assignments 
                 assignments={course.assignments}
@@ -50,3 +48,5 @@ export const Card = ({ course, viewByPrep, setActivePeriod }) => {
         </article>
     );
 }
+
+export default Card;
