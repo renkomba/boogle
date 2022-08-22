@@ -24,6 +24,7 @@ export default class Course {
             (runningTotal, Period) => runningTotal + Period.totalStudents,
             0
         );
+        this._assignmentLabels = this.initiateLabels();
     }
 
     get assignmentTypes() {
@@ -31,6 +32,22 @@ export default class Course {
     }
 
     get assignmentLabels() {
+        return this._assignmentLabels;
+    }
+
+    set assignmentLabels(labelsArr) {
+        this._assignmentLabels = labelsArr;
+    }
+    
+    get id() {
+        return this.title.toLowerCase().split(' ').join('-');
+    }
+    
+    get periodIds() {
+        return this.periods.map( Period => Period.id);
+    }
+    
+    initiateLabels() {
         let labels = [];
         for (let id in this.assignments) {
             let assignment = this.assignments[id];
@@ -38,14 +55,6 @@ export default class Course {
             !labels.includes(label) && labels.push(label);
         }
         return labels;
-    }
-
-    get id() {
-        return this.title.toLowerCase().split(' ').join('-');
-    }
-
-    get periodIds() {
-        return this.periods.map( Period => Period.id);
     }
 
     fetchStudentsArr() {
