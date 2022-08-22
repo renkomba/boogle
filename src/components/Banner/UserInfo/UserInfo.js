@@ -10,11 +10,11 @@ const UserInfo = () => {
             <i className="fa-solid fa-circle-user"
                 onClick={changeUser}
             ></i>
-            <p>
-                <span id="name">{user.displayName}</span>
+            <div><p>
+                <span className={styles.name}>{user.displayName}</span>
                 <br/><span id="title">{user.jobTitle}</span>
                 <br/><span id="school">{user.schoolName}</span>
-            </p>
+            </p></div>
         </section>
     );
 }
