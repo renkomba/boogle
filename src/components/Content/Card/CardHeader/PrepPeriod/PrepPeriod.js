@@ -4,7 +4,7 @@ import PageContext from "../../../../../contexts/PageContext";
 import UserContext from "../../../../../contexts/userContext";
 import styles from './PrepPeriod.module.css';
 
-export const PrepPeriod = ({ period, minimised }) => {
+const PrepPeriod = ({ period, minimised }) => {
     const { changePeriod } = useContext(UserContext);
     const { changePage } = useContext(PageContext);
     const navigate = useNavigate();
@@ -29,3 +29,5 @@ export const PrepPeriod = ({ period, minimised }) => {
         ></i>
     );
 }
+
+export default PrepPeriod;
