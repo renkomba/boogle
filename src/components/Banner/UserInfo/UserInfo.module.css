@@ -4,10 +4,19 @@
     display: flex;
     align-items: center;
     text-align: left;
+}
+
+.user p {
     margin: 0;
 }
 
 .user i {
     font-size: 4rem;
     margin-right: .75rem;
+}
+
+.user .name {
+    color: var(--light-header-colour);
+    font-size: 1.25rem;
+    font-weight: 900;
 }

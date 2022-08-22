@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './SettingsIcon.module.css';
 
-export const SettingsIcon = ({ toggle, setToggle }) => {
+const SettingsIcon = ({ toggle, setToggle }) => {
     return (
         <section className={styles.settings}
             onClick={ () => setToggle(!toggle) }
@@ -10,3 +10,5 @@ export const SettingsIcon = ({ toggle, setToggle }) => {
         </section>
     );
 }
+
+export default SettingsIcon;

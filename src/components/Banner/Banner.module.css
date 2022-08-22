@@ -1,0 +1,14 @@
+@import '../App.css';
+
+.banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 4vw;
+    background-color: var(--deep-colour);
+    color: var(--light-font-colour);
+}
+
+.banner > section {
+    cursor: pointer;
+}
