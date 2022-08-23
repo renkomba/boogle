@@ -1,21 +1,15 @@
 import React from "react";
-import { CalendarIcon } from "./CalendarIcon/CalendarIcon";
-import { UserInfo } from "./UserInfo/UserInfo";
-import { SettingsIcon } from "./SettingsIcon/SettingsIcon";
-import "./Banner.css";
+import CalendarIcon from "./CalendarIcon/CalendarIcon";
+import UserInfo from "./UserInfo/UserInfo";
+import SettingsIcon from "./SettingsIcon/SettingsIcon";
+import styles from "./Banner.module.css";
 
-const Banner = ({ user, setUser, toggle, setToggle }) => {
+const Banner = ({ toggle, setToggle }) => {
     return (
-        <header id="banner">
+        <header className={styles.banner}>
             <CalendarIcon />
-            <UserInfo 
-                user={user} 
-                setUser={setUser} 
-            />
-            <SettingsIcon 
-                toggle={toggle}
-                setToggle={setToggle}
-            />
+            <UserInfo />
+            <SettingsIcon toggle={toggle} setToggle={setToggle}/>
         </header>
     );
 }

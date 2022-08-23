@@ -1,26 +1,33 @@
 import React from "react";
 import AssignmentHeader from "./AssignmentHeader";
 import AssignmentBar from "./AssignmentBar";
-import './AssignmentGroup.css';
+import styles from './AssignmentGroup.module.css';
+import { useDroppable } from "@dnd-kit/core";
+import { 
+    SortableContext,
+    verticalListSortingStrategy
+} from "@dnd-kit/sortable";
 
-const AssignmentGroup = ({ sectionLabel, assignmentsObj, activePeriod }) => {
+const AssignmentGroup = ({
+    id, sectionLabel, activePeriod, relevantAssignments
+}) => {
+    const { setNodeRef } = useDroppable({ id })
     const icons = {
         assignment: 'fa-solid fa-file-lines',
         assessment: 'fa-solid fa-file-lines',
         application: 'fa-solid fa-file-lines',
-        resource: 'fa-regular fa-clipboard'
+        resource: 'fa-regular fa-clipboard',
+        site: 'fa-solid fa-globe',
+        link: 'fa-solid fa-link'
     };
 
     const populateAssignments = () => {
         let assignmentBars = [];
 
-        for (let id in assignmentsObj) {
-            let assignment = assignmentsObj[id];
+        for (let id of relevantAssignments) {
+            let assignment = activePeriod.course.assignments[id];
             let icon = assignment.type + ' ' + icons[assignment.type];
-            // console.log(sectionLabel);
-
-            assignment.label === sectionLabel 
-                && assignmentBars.push( generateBar(icon, assignment) );
+            assignmentBars.push( generateBar(icon, assignment) );
         }
 
         return assignmentBars;
@@ -36,11 +43,23 @@ const AssignmentGroup = ({ sectionLabel, assignmentsObj, activePeriod }) => {
     };
 
     return (
-        <section className="group">
+        <section
+            key={sectionLabel}
+            className={styles.group}
+        >
             <AssignmentHeader sectionLabel={sectionLabel} />
-            <article className="bars">
-                {populateAssignments()}
-            </article>
+            <SortableContext
+                id={id}
+                items={relevantAssignments}
+                strategy={verticalListSortingStrategy}
+            >
+                <article 
+                    className={styles.bars}
+                    ref={setNodeRef}
+                >
+                    {populateAssignments()}
+                </article>
+            </SortableContext>
         </section>
     );
 }

@@ -1,8 +1,10 @@
 import React from "react";
-import './SidebarIcon.css';
+import styles from './SidebarIcon.module.css';
 
-export const SidebarIcon = ({ goRight }) => {
+const SidebarIcon = ({ goRight }) => {
     return (
-        <i className={`sidebar-icon fa-solid fa-caret-${goRight ? 'right' : 'left'}`}></i>
+        <i className={`${styles.sidebar_icon} fa-solid fa-caret-${goRight ? 'right' : 'left'}`}></i>
     );
 }
+
+export default SidebarIcon;

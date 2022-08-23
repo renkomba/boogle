@@ -1,25 +1,22 @@
 import React from "react";
-import { Card } from "./Card/Card";
+import Card from "./Card/Card";
 import { Sidebar } from "../Sidebar/Sidebar";
-import { useDroppable } from "@dnd-kit/core";
+import { useDroppable } from '@dnd-kit/core';
 import {
     rectSortingStrategy,
     SortableContext,
     verticalListSortingStrategy
 } from "@dnd-kit/sortable";
-import './Content.css';
+import styles from './Content.module.css';
 
-export const Content = ({ id, cardIds, user, viewByPrep }) => {
+const Content = ({id, cardIds, user, viewByPrep}) => {    
     const { setNodeRef } = useDroppable({ id });
-   
-    const generateCards = (cards=[]) => {
-        let [ ids, collective ] = [
-            cardIds.slice(0),
-            viewByPrep ? user.courses.slice(0) 
-                : [...user.periods.nonCts, user.periods.cts]
-        ];
 
-        for (let cardId of ids) {
+    const generateCards = (cards=[]) => {
+        let collective = viewByPrep ? user.courses.slice(0) 
+            : [...user.periods.nonCts, user.periods.cts];
+
+        for (let cardId of cardIds.slice(0)) {
             for (let i = 0; i < collective.length; i++) {
                 if (collective[i].id === cardId) {
                     cards.push(<Card 
@@ -27,7 +24,11 @@ export const Content = ({ id, cardIds, user, viewByPrep }) => {
                         course={collective[i]} 
                         viewByPrep={viewByPrep}
                     />);
-                    collective.splice(i, 1);  //remove element as it is no longer an option
+
+                    // remove element that has just been matched
+                    collective.splice(i, 1);
+                    // decrement var i to compensate for splice
+                    i--;
                 }
             }
         }
@@ -35,19 +36,15 @@ export const Content = ({ id, cardIds, user, viewByPrep }) => {
     };
 
     return (
-        <article id="content">
+        <article className={styles.content}>
             <Sidebar />
-            <SortableContext 
-                id={id}
+            <SortableContext id={id}
                 items={cardIds}
-                strategy={
-                    viewByPrep ? verticalListSortingStrategy
-                        : rectSortingStrategy
-                }
+                strategy={ !viewByPrep ? rectSortingStrategy
+                    : verticalListSortingStrategy }
             >
-                <article 
-                    className="cards"
-                    ref={setNodeRef}
+                <article ref={setNodeRef}
+                    className={styles.cards}
                 >
                     {generateCards()}
                 </article>
@@ -55,3 +52,5 @@ export const Content = ({ id, cardIds, user, viewByPrep }) => {
         </article>
     );
 }
+
+export default Content;

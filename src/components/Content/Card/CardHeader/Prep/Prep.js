@@ -1,10 +1,12 @@
 import React from "react";
-import './Prep.css';
+import styles from './Prep.module.css';
 
-export const Prep = ({ prep, verticalHeader }) => {
+const Prep = ({ prep, verticalHeader }) => {
     return (
-        <h2 className={`prep ${verticalHeader ? 'vertical' : 'horizontal'}`}>
+        <h2 className={`${styles.prep} ${verticalHeader ? styles.vertical : styles.horizontal}`}>
             {prep}
         </h2>
     );
 }
+
+export default Prep;

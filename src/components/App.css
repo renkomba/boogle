@@ -2,8 +2,9 @@
   --deep-colour: hsl(0, 0%, 20%);
   --light-header-colour: hsl(0, 0%, 100%);
   --light-font-colour: hsl(0, 0%, 80%);
-  --dark-header-colour: hsl();
-  --dark-font-colour: hsl();
+  --dark-header-colour: hsl(0, 0%, 30%);
+  --dark-font-colour: hsl(0 0 5);
+  --light-deep-colour: hsl(0, 38%, 11%);
 }
 
 .App {

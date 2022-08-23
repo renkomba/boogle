@@ -1,0 +1,46 @@
+@import '../../App.css';
+
+.bar {
+    display: flex;
+    align-items: center;
+    padding: 1em 0;
+}
+
+.bar p {
+    margin: 0;
+}
+
+.bar i {
+    margin-right: 1em;
+    margin-left: .5em;
+    font-size: 1.5em;
+}
+
+.hidden {
+    background-color: var(--light-header-colour);
+    color: var(--light-header-colour);
+    border: 4px dotted rgb(50, 120, 205);
+}
+
+.bar .title {
+    margin: 0;
+    flex-grow: 1;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    margin: 0;
+}
+
+div.bar:nth-child(4n + 2) {
+    background-color: hsl(100, 0%, 97%);
+}
+
+div.bar.hidden:nth-child(4n + 2) {
+    color: hsl(100, 0%, 97%);
+}
+
+.bar .submissions {
+    margin-right: 1em;
+}

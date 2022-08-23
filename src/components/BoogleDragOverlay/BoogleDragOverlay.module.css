@@ -1,0 +1,21 @@
+@import '../App.css';
+
+div.overlay {
+    font-size: 1.25em;
+    font-weight: 600;
+    color: white;
+    background-color: var(--dark-header-colour);
+    max-width: fit-content;
+    padding: .25em .5em;
+    border-radius: 10px;
+    cursor: grabbing;
+    opacity: .75;
+}
+
+.spinner {
+    margin-right: .5em;
+}
+
+.visually_hidden {
+    display: none;
+}

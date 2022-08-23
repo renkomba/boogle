@@ -1,0 +1,51 @@
+@import '../../../App.css';
+
+.card_header {
+    text-align: center;
+    background-color: var(--light-font-colour);
+    padding: 3rem;
+    cursor: pointer;
+    transition: .5s;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.maximised {
+    flex-basis: 10rem;
+}
+
+.minimised {
+    display: flex;
+    flex-wrap: nowrap;
+    padding: .5rem;
+}
+
+/* ===== HOVER EFFECTS ===== */
+header.card_header:hover {
+    background-color: var(--deep-colour);
+    color: var(--light-header-colour);
+}
+
+header.card_header:hover > .periods .prep_period {
+    border-color: var(--light-header-colour);
+}
+
+header.card_header:hover > .card .prep::after {
+    content: '';
+    display: inline-block;
+    margin: 0rem 1.5rem 0rem .5rem;
+    min-height: 2rem;
+    background-color: var(--light-font-colour);
+    width: .5rem;
+    position: relative;
+    right: -.5rem;
+    top: .25rem;
+}
+
+@media only screen and (max-width: 875px) {
+    .card_header.maximised {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 3.3rem;
+    }
+}

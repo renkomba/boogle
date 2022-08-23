@@ -1,0 +1,65 @@
+@import '../App.css';
+
+.add_button_group {
+    z-index: 2;
+    position: fixed;
+    bottom: 0;
+    right: 1rem;
+    width: 8rem;
+    height: 8rem;
+    cursor: pointer;
+}
+
+.button span {
+    display: none;
+}
+
+button.work_button {
+    z-index: 3;
+    position: fixed;
+    bottom: 4.5rem;
+    right: 2rem;
+    font-size: 1.5rem;
+    border-radius: 50%;
+    background-color: var(--deep-colour);
+    padding: 1rem 1.5rem;
+    transition: .5s ease-in-out;
+}
+
+.add_button_group:hover .work_button {
+    padding: 1.25rem 1.75rem;
+    font-size: 2rem;
+}
+
+.add_button_group .button {
+    border-radius: 50% 50%;
+    position: fixed;
+    bottom: 5.5rem;
+    right: 2.5rem;
+    background-color: var(--dark-header-colour);
+    border-color: var(--dark-header-colour);
+    box-shadow: 0px 10px 15px var(--light-deep-colour);
+    transition: .5s ease-in-out;
+}
+
+.add_button_group .button:hover {
+    background-color: grey;
+}
+
+.add_button_group .announcement {
+    z-index: 2;
+    padding: .25rem 1rem;
+    font-size: 1rem;
+    border-radius: 50%;
+}
+
+.add_button_group:hover .announcement {
+    padding: .75rem 1rem;
+    bottom: 11rem;
+    right: 3.25rem;
+}
+
+.add_button_group:hover .resource {
+    bottom: 8.5rem;
+    right: 7.5rem;
+}

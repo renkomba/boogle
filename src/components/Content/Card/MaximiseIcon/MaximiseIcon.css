@@ -1,8 +1,0 @@
-.action-icon i {
-    /* display: none; */
-    align-items: center;
-    height: 100%;
-    background-color: var(--deep-colour);
-    color: var(--light-header-colour);
-    padding: 0 .5rem;
-}

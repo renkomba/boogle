@@ -5,6 +5,7 @@ footer {
     background-color: var(--deep-colour);
     color: var(--light-font-colour);
     text-align: center;
+    height: 2rem;
 }
 
 footer .logo {
@@ -13,7 +14,8 @@ footer .logo {
 }
 
 footer p {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    margin: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {

@@ -117,7 +117,7 @@ export default class Teacher extends User {
 
     generateCourses(courseload={}, courses=[]) {
         for (let course in courseload) {
-            courses.push(new Course(course, courseload[course]));
+            courses.push(new Course(course, courseload[course], this));
         }
         return courses;
     }

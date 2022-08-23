@@ -1,0 +1,14 @@
+.content {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    overflow-y: scroll;
+    align-content: flex-start;
+    max-width: 100vw;
+    overflow-y: scroll;
+}
+
+.cards {
+    overflow-y: scroll;
+    flex-grow: 1;
+}

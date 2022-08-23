@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import './Card.css';
-import { MaximiseIcon } from "./MaximiseIcon/MaximiseIcon";
-import { CardHeader } from "./CardHeader/CardHeader"
-import { Assignments } from "./Assignments/Assignments"
+import styles from './Card.module.css';
+import MaximiseIcon from "./MaximiseIcon/MaximiseIcon";
+import CardHeader from "./CardHeader/CardHeader"
+import Assignments from "./Assignments/Assignments"
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-export const Card = ({ course, viewByPrep }) => {
+const Card = ({ course, viewByPrep }) => {
     let [minimised, setMinimised] = useState(true);
 
     const {
@@ -23,11 +23,10 @@ export const Card = ({ course, viewByPrep }) => {
     };
 
     return (
-        <article 
+        <article className={styles.card}
             ref={setNodeRef} 
             id={course.id}
             key={course.id}
-            className="card"
             style={style}
             {...attributes} 
             {...listeners}
@@ -49,3 +48,5 @@ export const Card = ({ course, viewByPrep }) => {
         </article>
     );
 }
+
+export default Card;

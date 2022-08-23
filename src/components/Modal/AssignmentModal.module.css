@@ -1,0 +1,39 @@
+.modal p {
+    margin: 0;
+}
+
+.modal i {
+    margin-right: .5em;
+}
+
+.modal header {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.modal .modal_courses {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-bottom: .5em;
+}
+
+.modal .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+}
+
+button.attach_button,
+button.dropdown_toggle {
+    margin: 0;
+}
+
+.modal .period_buttons > label.period_button {
+    padding: .25em;
+    width: 2.5em;
+}
+
+.modalRow, .attachments {
+    align-items: center;
+}
