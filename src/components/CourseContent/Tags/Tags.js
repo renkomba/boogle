@@ -9,24 +9,33 @@ import Input from "../../Prompts/Input";
 
 const Tags = ({ activePeriod, filterByTag }) => {
     const [showPrompt, setShowPrompt] = useState(false);
-    const [tags, setTags] = useState({
+    const [tags, setTags] = useState(activePeriod.course ? {
         names: activePeriod.course.assignmentLabels,
         components: activePeriod.course.assignmentLabels.sort(
-            (currentWord, previousWord) =>
-                previousWord === 'Class Docs' ? 1
-                    : currentWord.localeCompare(previousWord)
+            (word, prevWord) => prevWord === 'Class Docs' ? 1
+                : word.localeCompare(prevWord)
         ).map( tag => addToggle(tag) )
-    }
-    );
+    } : {
+        names: activePeriod.assignmentLabels,
+        components: activePeriod.assignmentLabels.sort(
+            (word, prevWord) => prevWord === 'Class Docs' ? 1
+                : word.localeCompare(prevWord)
+        ).map( tag => addToggle(tag) )
+    });
 
     useEffect(
         () => {
-            setTags({
+            setTags(activePeriod.course ? {
                 names: activePeriod.course.assignmentLabels,
                 components: activePeriod.course.assignmentLabels.sort(
-                    (currentWord, previousWord) =>
-                        previousWord === 'Class Docs' ? 1
-                            : currentWord.localeCompare(previousWord)
+                    (word, prevWord) => prevWord === 'Class Docs' ? 1
+                        : word.localeCompare(prevWord)
+                ).map( tag => addToggle(tag) )
+            } : {
+                names: activePeriod.assignmentLabels,
+                components: activePeriod.assignmentLabels.sort(
+                    (word, prevWord) => prevWord === 'Class Docs' ? 1
+                        : word.localeCompare(prevWord)
                 ).map( tag => addToggle(tag) )
             });
         },
@@ -40,17 +49,16 @@ const Tags = ({ activePeriod, filterByTag }) => {
         }));
         
         return (
-            <ToggleButton
+            <ToggleButton className={styles.tag}
                 key={tag.split(' ').join('-')}
                 id={tag.split(' ').join('-')}
-                className={styles.tag}
                 value={tag}
             >{tag}</ToggleButton>
         );
     }
 
     const handleToggle = ({target: {value}}) => {
-        console.log('Handle toggle ran with value e:');
+        console.log('Handle toggle ran with value:');
         console.log(value);
         setShowPrompt(false);
     }
@@ -59,30 +67,31 @@ const Tags = ({ activePeriod, filterByTag }) => {
         <article className={styles.tags}>
             <h4>Tags</h4>
             <Form>
-                <Button className={styles.view_all_button}
-                    onClick={() => filterByTag(tags.names)}
-                    type="reset"
-                >All</Button>
+                <div className={styles.buttons_n_tags}>
+                    <Button className={styles.view_all_button}
+                        onClick={() => filterByTag(tags.names)}
+                        type="reset"
+                    >All</Button>
 
-                <ToggleButtonGroup onChange={filterByTag}
-                    className={styles.verticalButtonGroup}
-                    name="assignment-tags"
-                    type="checkbox"
-                    size="sm"
-                    vertical
-                >
-                    {tags.components}
-                </ToggleButtonGroup>
-                
-                { showPrompt ? <Input 
-                    contentType="tag"
-                    inputType="text"
-                    handleToggle={handleToggle}
-                /> : <Button className={styles.add_a_button}
-                    onClick={() => setShowPrompt(true)}
-                >
-                    <i className="fa-solid fa-plus"></i>
-                </Button>}
+                    <ToggleButtonGroup onChange={filterByTag}
+                        className={styles.verticalButtonGroup}
+                        name="assignment-tags"
+                        type="checkbox"
+                        size="sm"
+                        vertical
+                    >
+                        {tags.components}
+                    </ToggleButtonGroup>
+                    
+                    { showPrompt ? <Input inputType="text"
+                        handleToggle={handleToggle}
+                        contentType="tag"
+                    /> : <Button className={styles.add}
+                        onClick={() => setShowPrompt(true)}
+                    >
+                        <i className="fa-solid fa-plus"></i>
+                    </Button>}
+                </div>
             </Form>
         </article>
     );
