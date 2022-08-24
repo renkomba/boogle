@@ -1,0 +1,14 @@
+@import '../App.css';
+
+.file {
+    background-color: rgb(196, 241, 255);
+    margin: .75rem 0 0 2rem;
+    padding: .25rem 0;
+    display: flex;
+    flex-wrap: nowrap;
+    font-size: 1.25rem;
+}
+
+.file_name {
+    padding: 0;
+}
