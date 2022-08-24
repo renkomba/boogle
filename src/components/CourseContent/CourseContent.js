@@ -187,11 +187,6 @@ const CourseContent = ({ activePeriod, id }) => {
     };
 
     const filterByTag = (tags=[]) => {
-        // if (tags.target) tags = tags.target;
-
-        console.log('filtering by tag:');
-        console.log(tags);
-        console.log(typeof tags);
         tags = !tags.some(e => typeof e === typeof []) ? tags 
             : tags.find( e => typeof e === typeof []);
 
