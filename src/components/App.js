@@ -12,8 +12,8 @@ const App = () => {
   const [activePage, setActivePage] = useState('Dashboard');
 
   const changeUser = () => setUser(new Teacher());
-  const changePage = () => setActivePage(
-    activePage === 'Dashboard' ? 'Course Site' : 'Dashboard'
+  const changePage = page => setActivePage(
+    page === 'Dashboard' ? 'Course Site' : 'Dashboard'
   );
 
   return (
