@@ -7,15 +7,10 @@ const CategoryOverlay = ({ tag, assignments }) => {
     return (
         <div className={styles.overlay}>
             <h3>{tag}</h3>
-            <Badge 
-                pill
-                className={styles.badge_background}
-            >
+            <Badge pill className={styles.badge_background}>
                 {assignments.length}
             </Badge>
-            <span
-                className={styles.visually_hidden}
-            >
+            <span className={styles.visually_hidden}>
                 There are {assignments.length} assignments under {tag}
             </span>
         </div>
