@@ -1,3 +1,15 @@
+div.modal-body,
+div.modal-header {
+    padding: 1.5rem;
+}
+
+/* not working. trying to impleted glassmorphism */
+.assignment_editor div.modal-content {
+    background-color: red;
+    fill-opacity: .25;
+    opacity: .5;
+}
+
 .modal p {
     margin: 0;
 }
@@ -6,10 +18,14 @@
     margin-right: .5em;
 }
 
-.modal header {
-    display: flex;
-    flex-wrap: nowrap;
+.modal header .title {
+    margin-left: .75rem;
 }
+
+/* .modal_title,
+.modal_type {
+    margin-left: ;
+} */
 
 .modal .modal_courses {
     display: flex;
@@ -36,4 +52,8 @@ button.dropdown_toggle {
 
 .modalRow, .attachments {
     align-items: center;
+}
+
+.attach_button {
+    margin-right: 2rem;
 }
