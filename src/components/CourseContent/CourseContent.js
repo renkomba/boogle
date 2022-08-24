@@ -186,6 +186,23 @@ const CourseContent = ({ activePeriod, id }) => {
         return groups;
     };
 
+    const filterByTag = (tags=[]) => {
+        // if (tags.target) tags = tags.target;
+
+        console.log('filtering by tag:');
+        console.log(tags);
+        console.log(typeof tags);
+        tags = !tags.some(e => typeof e === typeof []) ? tags 
+            : tags.find( e => typeof e === typeof []);
+
+        setAssignmentGroups(Object.fromEntries(tags.map( tag => [
+            tag,
+            Object.values(activePeriod.assignments).filter(
+                Assignment => Assignment.label === tag
+            ).map( Assignment => Assignment.id )
+        ])));
+    };
+
     // Sortable <Assignment Bar /> functions
     const startDraggingBar = ({active: {id}}) => setActiveIds(
         activeIds => ({
@@ -239,7 +256,9 @@ const CourseContent = ({ activePeriod, id }) => {
 
     return (
         <article className={styles.course_content}>
-            <CourseSidebar activePeriod={activePeriod} />
+            <CourseSidebar activePeriod={activePeriod}
+                filterByTag={filterByTag}
+            />
 
             <div className={styles.buttons_and_assignments}>
                 <section className={styles.assignment_groups}>
