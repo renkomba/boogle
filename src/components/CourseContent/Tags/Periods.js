@@ -10,7 +10,7 @@ const addToggle = (label='') => {
         <ToggleButton
             key={label.split(' ').join('-')}
             id={label.split(' ').join('-')}
-            className={styles.tab}
+            className={styles.tag}
             value={label}
         >{label}</ToggleButton>
     );
@@ -19,7 +19,9 @@ const addToggle = (label='') => {
 const Periods = ({ activePeriod }) => {
     const [showPrompt, setShowPrompt] = useState(false);
     const [periods, setPeriods] = useState(
-        activePeriod.course.periods.map(
+        activePeriod.course ? activePeriod.course.periods.map(
+            Period => addToggle(Period.period)
+        ) : activePeriod.periods.map(
             Period => addToggle(Period.period)
         )
     );
@@ -40,7 +42,8 @@ const Periods = ({ activePeriod }) => {
             ...prevPeriods,
             new Period(
                 activePeriod.title, 
-                activePeriod.course, 
+                activePeriod.course ? 
+                    activePeriod.course : activePeriod, 
                 value
             )
         ] );
@@ -54,7 +57,7 @@ const Periods = ({ activePeriod }) => {
     // }
 
     return (
-        <article className={styles.tabs}>
+        <article className={styles.tags}>
             <h4>Periods</h4>
             <ToggleButtonGroup
                 className={styles.verticalButtonGroup}
