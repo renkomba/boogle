@@ -11,9 +11,9 @@ import {
     arrayMove, 
     sortableKeyboardCoordinates 
 } from '@dnd-kit/sortable';
-import { Content } from '../Content/Content';
+import Content from '../components/Content/Content';
     
-const Dashboard = ({ user, toggle, activePage, setActivePage, activePeriod, setActivePeriod }) => {
+const Dashboard = ({ user, toggle }) => {
     const [cardIds, setCardIds] = useState([]);
 
     useEffect( 
@@ -27,9 +27,7 @@ const Dashboard = ({ user, toggle, activePage, setActivePage, activePeriod, setA
 
     const sensors = useSensors(
         useSensor(PointerSensor, {
-            activationConstraint: {
-                distance: 10
-            }
+            activationConstraint: { distance: 10 }
         }),
         useSensor(KeyboardSensor, {
             coordinateGetter: sortableKeyboardCoordinates
@@ -37,36 +35,25 @@ const Dashboard = ({ user, toggle, activePage, setActivePage, activePeriod, setA
     );
     
     const handleDragEnd = ({ active, over }) => {
-        if (active.id !== over.id) {
-            setCardIds( () => {
-                let [iOld, iNew] = [
+        active.id !== over.id && setCardIds( () => {
+            let [iOld, iNew] = [
                 cardIds.indexOf(active.id),
                 cardIds.indexOf(over.id)
-                ];
-        
-                return arrayMove(cardIds, iOld, iNew)
-            });
-        }
+            ];
+            return arrayMove(cardIds, iOld, iNew)
+        });
     };
 
     return (
         <main className='Dashboard'>
-            <DndContext
-                collisionDetection={closestCorners}
-                // onDragStart={handleDragStart}
-                // onDragOver={handleDragOver}
+            <DndContext sensors={sensors}
                 onDragEnd={handleDragEnd}
-                sensors={sensors}
+                collisionDetection={closestCorners}
             >
-                <Content 
-                    id="card-container"
+                <Content user={user}
                     cardIds={cardIds}
-                    user={user}
                     viewByPrep={toggle}
-                    activePage={activePage}
-                    setActivePage={setActivePage}
-                    activePeriod={activePeriod}
-                    setActivePeriod={setActivePeriod}
+                    id="card-container"
                 />
             </DndContext>
         </main>
