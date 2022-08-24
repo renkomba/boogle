@@ -23,22 +23,28 @@ import CourseSidebar from "../Sidebar/CourseSidebar";
 import AddButtons from "../Buttons/AddButtons";
 
 const CourseContent = ({ activePeriod, id }) => {
-    const [tags, setTags] = useState(
-        activePeriod.course.assignmentLabels
+    const [tags, setTags] = useState( activePeriod.course ?
+        activePeriod.course.assignmentLabels 
+        : activePeriod.assignmentLabels
     );
     const [activeIds, setActiveIds] = useState({
         bar: null,
         group: null
     });
     const [assignmentGroups, setAssignmentGroups] = useState(
-        Object.fromEntries( activePeriod.course.assignmentLabels.map( 
-            tag => [
+        Object.fromEntries( activePeriod.course ? 
+            activePeriod.course.assignmentLabels.map( tag => [
                 tag,
                 Object.values(activePeriod.assignments).filter(
                     Assignment => Assignment.label === tag
                 ).map( Assignment => Assignment.id )
-            ]
-        ) )
+            ]) : activePeriod.assignmentLabels.map( tag => [
+                tag,
+                Object.values(activePeriod.assignments).filter(
+                    Assignment => Assignment.label === tag
+                ).map( Assignment => Assignment.id )
+            ])
+        )
     );
 
     useEffect(
@@ -280,7 +286,9 @@ const CourseContent = ({ activePeriod, id }) => {
                                     {activeIds.bar && 
                                         <AssignmentOverlay 
                                             id={activeIds.bar}
-                                            label={activePeriod.course.assignments[activeIds.bar].title}
+                                            label={activePeriod.course ?
+                                                activePeriod.course.assignments[activeIds.bar].title
+                                                : activePeriod.assignments[activeIds.bar].title}
                                     /> }
                                 </DragOverlay>
                             </DndContext>
