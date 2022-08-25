@@ -18,7 +18,17 @@ const AssignmentBar = ({ icon, assignment, activePeriod, activeBarId }) => {
     );
 
     let [ submissionsObj, iconJsx ] = [
-        activePeriod.submissions[assignment.id],
+        activePeriod.course ? activePeriod.submissions[assignment.id]
+            : Object.fromEntries(Object.values(activePeriod.assignments).map(
+                Assignment => [
+                    Assignment.id, 
+                    Object.fromEntries([
+                        [ 'isCompleted', Assignment.isCompleted ],
+                        [ 'isInProgress', Assignment.isInProgress ],
+                        [ 'turnedIn', Assignment.turnedIn ],
+                    ])
+                ]
+            )),
         <i className={icon}></i>
     ];
 
