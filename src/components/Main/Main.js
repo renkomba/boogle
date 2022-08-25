@@ -14,8 +14,8 @@ const Main = ({ activePage, changePage, user, changeUser }) => {
     const [toggle, setToggle] = useState(true);
     const [activeCourse, setActiveCourse] = useState({
         course: user.courses[0],
-        period: user.courses[0].periods.length > 1 ?
-            user.courses[0] : user.courses.periods[0]
+        period: user.courses[0].periods.length > 2 ?
+            user.courses[0] : user.courses[0].periods[0]
     });
     
     const toggleView = () => setToggle(!toggle);
