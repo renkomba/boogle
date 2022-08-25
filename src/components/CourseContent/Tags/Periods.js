@@ -1,53 +1,59 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import Period from "../../../classes/Period";
+import UserContext from "../../../contexts/userContext";
+import getOrdinalSuffix from "../../functions/getOrdinalSuffix";
 import Input from "../../Prompts/Input";
 import styles from './Tags.module.css';
 
-const addToggle = (label='') => {
-    return (
-        <ToggleButton
-            key={label.split(' ').join('-')}
-            id={label.split(' ').join('-')}
-            className={styles.tag}
-            value={label}
-        >{label}</ToggleButton>
-    );
-}
 
-const Periods = ({ activePeriod }) => {
+const Periods = ({ activePeriod, filterByTag }) => {
     const [showPrompt, setShowPrompt] = useState(false);
-    const [periods, setPeriods] = useState(
-        activePeriod.course ? activePeriod.course.periods.map(
-            Period => addToggle(Period.period)
-        ) : activePeriod.periods.map(
+    const [periods, setPeriods] = useState((activePeriod.course ? 
+        activePeriod.course : activePeriod).periods.map(
             Period => addToggle(Period.period)
         )
     );
 
-    // useEffect(
-    //     () => {
-    //         setPeriods(activePeriod.course.periods.map(
-    //             Period => addToggle(Period.period)
-    //         ));
+    const { changePeriod } = useContext(UserContext);
 
-    //         showPrompt && setShowPrompt(false);
-    //     },
-    //     [activePeriod]
-    // );
+    function addToggle(period='', addedByUser=false) {
+        // console.log(activePeriod);
+        if (addedByUser) {
+            let p = new Period(
+                (activePeriod.course ? activePeriod.course 
+                    : activePeriod).title,
+                activePeriod.course ? activePeriod.course 
+                    : activePeriod,
+                `${period}${getOrdinalSuffix(period)} Period`
+            );
 
-    const handleToggle = ({ target: {value} }) => {
-        setPeriods( prevPeriods => [
-            ...prevPeriods,
-            new Period(
-                activePeriod.title, 
-                activePeriod.course ? 
-                    activePeriod.course : activePeriod, 
-                value
-            )
-        ] );
+            p.course.periods = p;
+            period = p.period;
+        }
+
+        let toggleButton = (<ToggleButton value={period}
+            checked={period === activePeriod.period}
+            key={period.split(' ').join('-')}
+            id={period.split(' ').join('-')}
+            className={styles.tag}
+        >{period}</ToggleButton>);
+
+        addedByUser && setPeriods(periods => [ 
+            ...periods, toggleButton 
+        ]);
+
+        return toggleButton;
+    }
+
+    const handleToggle = e => {
+        console.log('Handle toggle ran with value:');
+        console.log(e);
         setShowPrompt(false);
+        addToggle(e.target.value, true);
     }
 
     // const filterAssignmentGroups = selectedLabelsArr => {
@@ -59,36 +65,34 @@ const Periods = ({ activePeriod }) => {
     return (
         <article className={styles.tags}>
             <h4>Periods</h4>
-            <ToggleButtonGroup
-                className={styles.verticalButtonGroup}
-                // onChange={setActivePeriod}
-                name="course-periods"
-                type="checkbox"
-                size="sm"
-                vertical
-            >
-                { periods.length > 2 && <ToggleButton
-                    id="label-all"
-                    className={styles.allLabels}
-                    value={periods}
-                    defaultChecked
-                >All</ToggleButton>}
+            <Form>
+                <div className={styles.buttons_n_tags}>
+                    { periods.length > 2 && <Button type="reset"
+                        onClick={ () => filterByTag(periods) }
+                        className={styles.view_all_button}
+                    >All</Button> }
 
-                {periods}
+                    <ToggleButtonGroup onChange={changePeriod}
+                        className={styles.verticalButtonGroup}
+                        name="course-periods"
+                        type="radio"
+                        size="sm"
+                        vertical
+                    >
+                        {periods}
+                    </ToggleButtonGroup>
 
-                {!showPrompt ? <Input 
-                    contentType='period'
-                    inputType='number'
-                    handleToggle={handleToggle} 
-                /> : <ToggleButton
-                    id="label-add"
-                    className={styles.add}
-                    value={periods}
-                    onClick={setShowPrompt(true)}
-                >
-                    <i className="fa-solid fa-plus"></i>
-                </ToggleButton>}
-            </ToggleButtonGroup>
+                    { showPrompt ? <Input inputType="number"
+                        className={styles.tag_input}
+                        handleToggle={handleToggle}
+                        contentType="period"
+                    /> : <Button className={styles.add}
+                        onClick={ () => setShowPrompt(true)}
+                    >
+                        <i className="fa-solid fa-plus"></i>
+                    </Button>}
+                </div>
+            </Form>
         </article>
     );
 }
