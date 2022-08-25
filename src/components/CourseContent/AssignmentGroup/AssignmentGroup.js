@@ -74,7 +74,9 @@ const AssignmentGroup = ({ tag, activePeriod, group, activeIds}) => {
         let assignmentBars = [generateBarSpacer()];
 
         for (let id of group) {
-            let assignment = activePeriod.course.assignments[id];
+            let assignment = activePeriod.course ? 
+                activePeriod.course.assignments[id] 
+                : activePeriod.assignments[id];
             let icon = assignment.type + ' ' + icons[assignment.type];
             assignmentBars.push(...[
                 generateBar(icon, id, assignment),
