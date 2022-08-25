@@ -14,7 +14,8 @@ const Main = ({ activePage, changePage, user, changeUser }) => {
     const [toggle, setToggle] = useState(true);
     const [activeCourse, setActiveCourse] = useState({
         course: user.courses[0],
-        period: user.courses[0]
+        period: user.courses[0].periods.length > 1 ?
+            user.courses[0] : user.courses.periods[0]
     });
     
     const toggleView = () => setToggle(!toggle);
@@ -31,8 +32,18 @@ const Main = ({ activePage, changePage, user, changeUser }) => {
         }));
     }
 
-    const changePeriod = ({ target: {classList}}) => {
-        classList = Array.from(classList);
+    const changePeriod = e => {
+        if (typeof e === 'string' && e.endsWith('Period')) {
+            setActiveCourse( activeCourse => ({
+                ...activeCourse,
+                period: activeCourse.course.periods.find(
+                    Period => Period.period === e
+                )
+            }) );
+            return
+        }
+
+        let classList = Array.from(e.target.classList);
         let [ courseTitle, isCourse ] = [
             classList.slice(0, 2).join(' '),
             classList[3] === 'course'
@@ -110,4 +121,5 @@ const Main = ({ activePage, changePage, user, changeUser }) => {
         </UserContext.Provider>
     );
 }
+
 export default Main;
