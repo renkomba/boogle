@@ -9,33 +9,25 @@ import Input from "../../Prompts/Input";
 
 const Tags = ({ activePeriod, filterByTag }) => {
     const [showPrompt, setShowPrompt] = useState(false);
-    const [tags, setTags] = useState(activePeriod.course ? {
-        names: activePeriod.course.assignmentLabels,
-        components: activePeriod.course.assignmentLabels.sort(
-            (word, prevWord) => prevWord === 'Class Docs' ? 1
-                : word.localeCompare(prevWord)
-        ).map( tag => addToggle(tag) )
-    } : {
-        names: activePeriod.assignmentLabels,
-        components: activePeriod.assignmentLabels.sort(
-            (word, prevWord) => prevWord === 'Class Docs' ? 1
-                : word.localeCompare(prevWord)
+    const [tags, setTags] = useState({
+        names: (activePeriod.course ? activePeriod.course 
+            : activePeriod).assignmentLabels,
+        components: (activePeriod.course ? activePeriod.course 
+            : activePeriod).assignmentLabels.sort(
+                (word, prevWord) => prevWord === 'Class Docs' ?
+                    1 : word.localeCompare(prevWord)
         ).map( tag => addToggle(tag) )
     });
 
     useEffect(
         () => {
-            setTags(activePeriod.course ? {
-                names: activePeriod.course.assignmentLabels,
-                components: activePeriod.course.assignmentLabels.sort(
-                    (word, prevWord) => prevWord === 'Class Docs' ? 1
-                        : word.localeCompare(prevWord)
-                ).map( tag => addToggle(tag) )
-            } : {
-                names: activePeriod.assignmentLabels,
-                components: activePeriod.assignmentLabels.sort(
-                    (word, prevWord) => prevWord === 'Class Docs' ? 1
-                        : word.localeCompare(prevWord)
+            setTags({
+                names: (activePeriod.course ? activePeriod.course 
+                    : activePeriod).assignmentLabels,
+                components: (activePeriod.course ? activePeriod.course 
+                    : activePeriod).assignmentLabels.sort(
+                        (word, prevWord) => prevWord === 'Class Docs' ?
+                            1 : word.localeCompare(prevWord)
                 ).map( tag => addToggle(tag) )
             });
         },
