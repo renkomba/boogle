@@ -16,7 +16,7 @@ export default class Course {
         this.user = user;
         this.title = title;
         this.assignments = this.fetchAssignments();
-        this.periods = periods.map( 
+        this._periods = periods.map( 
             period => new Period(title, this, period) 
         );
         
@@ -45,6 +45,23 @@ export default class Course {
     
     get periodIds() {
         return this.periods.map( Period => Period.id);
+    }
+
+    get periods() {
+        return this._periods;
+    }
+
+    set periods(newPeriod) {
+        if (this._periods.some( 
+            Period => Period.period === newPeriod.period
+        )) return;
+        
+        this._periods.push(newPeriod);
+        this._periods.sort( 
+            (a, b) => a.period.localeCompare(b.period) 
+        );
+
+        this.totalStudents += newPeriod.totalStudents;
     }
     
     initiateLabels() {
