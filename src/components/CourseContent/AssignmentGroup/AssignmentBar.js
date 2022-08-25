@@ -18,9 +18,16 @@ const AssignmentBar = ({ icon, assignment, activePeriod, activeBarId }) => {
     );
 
     let [ submissionsObj, iconJsx ] = [
-        activePeriod.submissions[assignment.id],
+        activePeriod.course ? activePeriod.submissions[assignment.id]
+            : Object.fromEntries([
+                [ 'isCompleted', assignment.isCompleted ],
+                [ 'isInProgress', assignment.isInProgress ],
+                [ 'turnedIn', assignment.submissions ],
+            ]),
         <i className={icon}></i>
     ];
+    let isCompleted = submissionsObj.isCompleted
+        || submissionsObj.turnedIn === activePeriod.totalStudents;
 
     const {
         attributes,
@@ -59,8 +66,7 @@ const AssignmentBar = ({ icon, assignment, activePeriod, activeBarId }) => {
             />
             { 
                 !['resource', 'site'].includes(assignment.type)
-                && (submissionsObj.isCompleted ?
-                    <i className="fa-solid fa-check"></i>
+                && (isCompleted ? <i className="fa-solid fa-check"></i>
                     : <p className={styles.submissions}>
                         {submissionsObj.turnedIn}
                         &nbsp;/&nbsp;

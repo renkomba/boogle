@@ -1,15 +1,19 @@
 @import '../../App.css';
 
 .tags {
-    display: flex;
-    flex-flow: column nowrap;
+    display: grid;
+    justify-items: center;
     align-items: center;
     color: black;
 }
 
-.tags .allLabels,
+.buttons_n_tags {
+    display: grid;
+}
+
+.tags .view_all_button,
 .tags .add,
-.tags .tab {
+.tags .tag {
     background-color: transparent;
     color: black;
     border: none;
@@ -21,9 +25,9 @@
     text-align: left;
 }
 
-.tags .allLabels:hover,
+.tags .view_all_button:hover,
 .tags .add:hover,
-.tags .tab:hover {
+.tags .tag:hover {
     /* background-color: grey; */
     background-color: white;
     color: black;
@@ -32,22 +36,22 @@
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
-.tags .allLabels:active,
+.tags .view_all_button:active,
 .tags .add:active,
-.tags .tab:active {
+.tags .tag:active {
     background-color: var(--deep-colour);
     color: white;
 }
 
-.tags .allLabels:focus-visible,
+.tags .view_all_button:focus-visible,
 .tags .add:focus-visible,
-.tags .tab:focus-visible {
+.tags .tag:focus-visible {
     outline: var(--deep-colour) solid 2px;
 }
 
-.tags .allLabels:focus,
+.tags .view_all_button:focus,
 .tags .add:focus,
-.tags .tab:focus {
+.tags .tag:focus {
     /* background-color: var(--deep-colour); */
     background-color: white;
     color: black;
@@ -56,9 +60,9 @@
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 
-.tags .allLabels:active,
+.tags .view_all_button:active,
 .tags .add:active,
-.tags .tab:active {
+.tags .tag:active {
     /* background-color: var(--deep-colour); */
     background-color: white;
     color: black;
@@ -67,20 +71,20 @@
     box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
 }
 
-.btn-check:focus + .tabs .tab {
+.btn-check:focus + .tags .tag {
     background-color: var(--deep-colour);
     color: white;
     box-shadow: 0 5px 20px red;
 }
 
-.tags .allLabels,
+.tags .view_all_button,
 .tags .add {
     background-color: var(--light-font-colour);
     text-align: center;
 }
 
-.tags .allLabels,
-.tags .tab {
+.tags .allLview_all_buttonabels,
+.tags .tag {
     margin-bottom: .75em;
 }
 
@@ -89,7 +93,7 @@
 }
 
 .tag:not(.add),
-.allLabels {
+.view_all_button {
     /* background-color: var(--light-deep-colour); */
     border-color: var(--light-deep-colour);
 }

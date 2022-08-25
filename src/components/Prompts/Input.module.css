@@ -1,1 +1,15 @@
 @import '../App.css';
+
+.input_grid {
+    display: flex;
+}
+
+.input_grid .add_input {
+    border-top-right-radius: 0%;
+    border-bottom-right-radius: 0%;
+}
+
+.input_grid .submit_input {
+    border-top-left-radius: 0%;
+    border-bottom-left-radius: 0%;
+}
