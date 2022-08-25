@@ -49,9 +49,9 @@ const Tags = ({ activePeriod, filterByTag }) => {
         );
     }
 
-    const handleToggle = ({target: {value}}) => {
+    const handleToggle = e => {
         console.log('Handle toggle ran with value:');
-        console.log(value);
+        console.log(e.target.value);
         setShowPrompt(false);
     }
 
@@ -60,10 +60,10 @@ const Tags = ({ activePeriod, filterByTag }) => {
             <h4>Tags</h4>
             <Form>
                 <div className={styles.buttons_n_tags}>
-                    <Button className={styles.view_all_button}
+                    { tags.length > 2 && <Button className={styles.view_all_button}
                         onClick={() => filterByTag(tags.names)}
                         type="reset"
-                    >All</Button>
+                    >All</Button> }
 
                     <ToggleButtonGroup onChange={filterByTag}
                         className={styles.verticalButtonGroup}
