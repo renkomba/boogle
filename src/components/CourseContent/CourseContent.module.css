@@ -22,7 +22,7 @@
 .buttons_and_assignments {
     grid-area: assignments;
     max-height: calc(100vh - 8rem);
-    margin: 0 1em 0 2em;
+    margin: 0 1em 0 0;
     overflow: auto;
 }
 
