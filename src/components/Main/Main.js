@@ -33,20 +33,28 @@ const Main = ({ activePage, changePage, user, changeUser }) => {
 
     const changePeriod = ({ target: {classList}}) => {
         classList = Array.from(classList);
-        let courseTitle = classList.slice(0, 2).join(' ');
+        let [ courseTitle, isCourse ] = [
+            classList.slice(0, 2).join(' '),
+            classList[3] === 'course'
+        ];
     
+        let period;
         let course = user.courses.find(
           Course => Course.title === courseTitle
         );
         
-        let lastClass = classList[classList.length - 1];
-        let numStr = lastClass[lastClass.length - 1];
-        let period = numStr === 'p' ? course.periods.slice(0).pop()
-          : course.periods.find(Period => Period.period.includes(numStr));
+        if (!isCourse) {
+            let lastClass = classList[classList.length - 1];
+            let numStr = lastClass[lastClass.length - 1];
+            period = numStr === 'p' ? course.periods.slice(0).pop()
+                : course.periods.find(
+                    Period => Period.period.includes(numStr)
+                );
+        }
         
         setActiveCourse( () => ({
           course: course,
-          period: period
+          period: isCourse ? course : period
         }));
     }
 
