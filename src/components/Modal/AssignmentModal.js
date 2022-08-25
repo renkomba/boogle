@@ -20,14 +20,14 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
     const [attachedLinks, setAttachedLinks] = useState([]);
     const [files, setFiles] = useState([]);
     const [hidePeriods, setHidePeriods] = useState(
-        Object.fromEntries(activePeriod.course.user.courses.map(
-            Course => [Course.id, true]
+        Object.fromEntries( (activePeriod.course ? activePeriod.course : activePeriod).user.courses.map(
+                Course => [ Course.id, true ]
         ))
     );
 
     useEffect(
         () => {
-            if(getIcons().length > 0){
+            if (getIcons().length > 0) {
                 let icon = getIcons()[0];
                 let lastClass = icon.classList[icon.classList.length - 1];
                 let pseudoElement = window.getComputedStyle(icon, '::before')
@@ -41,21 +41,17 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
     );
 
     useEffect(
-        () => {
-            setAttachedLinks( prevArr => [
-                ...files,
-                ...prevArr
-            ]);
-        },
+        () => setAttachedLinks(prevArr => [ ...files, ...prevArr ]),
         [files]
     );
 
     const handleClose = () => {
         setShow(false);
-        setHidePeriods(
-            Object.fromEntries(activePeriod.course.user.courses.map(
-                Course => [Course.id, true]
-            )));
+        setHidePeriods(Object.fromEntries( 
+            (activePeriod.course ? activePeriod.course : activePeriod).user.courses.map(
+                Course => [ Course.id, true ]
+            )
+        ));
     };
 
     const handleSubmit = e => {
@@ -131,7 +127,8 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
                         </h3>
                     </header>
                     <p className={styles.submissions}>
-                        {activePeriod.submissions[assignment.id].turnedIn}
+                        {!activePeriod.course ? assignment.submissions
+                            : activePeriod.submissions[assignment.id].turnedIn}
                         &nbsp;/&nbsp;
                         {activePeriod.totalStudents}
                     </p>
@@ -171,13 +168,13 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
                                     {assignment.type}
                                 </option>
                                 {
-                                    activePeriod.course.assignmentTypes.filter( 
-                                        type => type !== assignment.type
-                                    ).map( 
-                                        type => (<option value={type} key={type}>
-                                            {type[0]+type.slice(1)}
-                                        </option>) 
-                                    )
+                                    (activePeriod.course ? activePeriod.course : activePeriod).assignmentTypes.filter( 
+                                            type => type !== assignment.type
+                                        ).map( type => (
+                                            <option value={type} key={type}>
+                                                {type[0]+type.slice(1)}
+                                            </option> 
+                                    ))
                                 }
                             </Form.Select>
                         </FloatingLabel>
@@ -195,13 +192,13 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
                             >
                                 <option value={assignment.label}>{assignment.label}</option>
                                 {
-                                    activePeriod.course.assignmentLabels.filter( 
-                                        label => label !== assignment.label
-                                    ).map( 
-                                        label => (<option value={label} key={label}>
-                                            {label}
-                                        </option>) 
-                                    )
+                                    (activePeriod.course ? activePeriod.course : activePeriod).assignmentLabels.filter( 
+                                            label => label !== assignment.label
+                                        ).map( label => (
+                                            <option value={label} key={label}>
+                                                {label}
+                                            </option> 
+                                    ))
                                 }
                             </Form.Select>
                         </FloatingLabel>
@@ -272,11 +269,11 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
                     <fieldset>
                         <Form.Group
                             as={Row}
-                            name={`${activePeriod.course.title} periods`}
+                            name={`${(activePeriod.course ? activePeriod.course : activePeriod).title} periods`}
                         >
                             <Form.Label>Assign to:</Form.Label>
                             
-                            {activePeriod.course.user.courses.map(
+                            { (activePeriod.course ? activePeriod.course : activePeriod).user.courses.map(
                                 Course => <Row
                                     className={`${styles.modalRow} ${styles.modal_courses}`}
                                     key={`${Course.id}-toggle-switch`}
