@@ -219,11 +219,11 @@ const CourseContent = ({ activePeriod, id }) => {
             );
     }
 
-    const findTag = barId => {
-        return Object.keys(assignmentGroups).filter(
-            tag => assignmentGroups[tag].includes(barId)
-        )[0];
-    }
+    // const findTag = barId => {
+    //     return Object.keys(assignmentGroups).filter(
+    //         tag => assignmentGroups[tag].includes(barId)
+    //     )[0];
+    // }
 
     const dragBarOver = ({
         activatorEvent: {target: {offsetTop}},
@@ -251,7 +251,7 @@ const CourseContent = ({ activePeriod, id }) => {
             activePeriod.assignments[id],
             findGroup(id)
         ];
-        
+
         if (assignment.label !== tag) assignment.label = tag; 
         console.log(assignment);
 
@@ -313,7 +313,10 @@ const CourseContent = ({ activePeriod, id }) => {
                         </DragOverlay>
                     </DndContext>
                 </section>
-                <AddButtons />
+                <AddButtons activePeriod={activePeriod} 
+                    setAssignmentGroups={setAssignmentGroups}
+                />
+                {}
             </div>
 
         </div>
