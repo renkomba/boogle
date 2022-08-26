@@ -46,7 +46,7 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
     );
 
     const handleClose = () => {
-        setShow(false);
+        show && setShow(false);
         setHidePeriods(Object.fromEntries( 
             (activePeriod.course ? activePeriod.course : activePeriod).user.courses.map(
                 Course => [ Course.id, true ]
@@ -108,7 +108,7 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
 
     return (
         <Modal
-            show={show}
+            show={show !== undefined && show}
             onHide={handleClose}
             backdrop="static"
             keyboard={true}
