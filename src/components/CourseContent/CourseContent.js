@@ -247,11 +247,20 @@ const CourseContent = ({ activePeriod, id }) => {
         // debugger;
         console.log(`1. Dragged ${id} into ${idOver}'s spot`);
         console.log(id !== idOver ? 'Should set state' : 'BUG!');
+        let [ assignment, tag ] = [
+            activePeriod.assignments[id],
+            findGroup(id)
+        ];
+        
+        if (assignment.label !== tag) assignment.label = tag; 
+        console.log(assignment);
+
         id !== idOver && changeGroups({
-            tag: findTag(id),
+            tag: tag,
             id: id,
             idOver: idOver
         });
+        
         setActiveIds( activeIds => ({...activeIds, bar: null}) );
     }
 
