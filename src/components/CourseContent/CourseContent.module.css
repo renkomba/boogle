@@ -9,8 +9,8 @@
     width: 100vw;
     grid-template-columns: max-content;
     flex-grow: 1;
-    overflow: hidden;
-    max-height: calc(100vh - 8rem);
+    overflow: auto;
+    height: calc(100vh - 8rem);
 }
 
 .course_sidebar > div {

@@ -1,7 +1,7 @@
 import getRandomNum from "../components/functions/getRandomNum";
 
 export default class Period {
-    constructor(title='', course, period) {
+    constructor(title='', course, period='') {
         this.title = title;
         this.course = course;
         this.period = period;

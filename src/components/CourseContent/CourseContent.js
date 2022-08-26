@@ -256,7 +256,7 @@ const CourseContent = ({ activePeriod, id }) => {
     }
 
     return (
-        <article className={styles.course_content}>
+        <div className={styles.course_content}>
             <CourseSidebar activePeriod={activePeriod}
                 filterByTag={filterByTag}
             />
@@ -307,7 +307,7 @@ const CourseContent = ({ activePeriod, id }) => {
                 <AddButtons />
             </div>
 
-        </article>
+        </div>
     );
 }
 

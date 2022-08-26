@@ -43,11 +43,11 @@ const Content = ({id, cardIds, user, viewByPrep}) => {
                 strategy={ !viewByPrep ? rectSortingStrategy
                     : verticalListSortingStrategy }
             >
-                <article ref={setNodeRef}
+                <div ref={setNodeRef}
                     className={styles.cards}
                 >
                     {generateCards()}
-                </article>
+                </div>
             </SortableContext>
         </article>
     );
