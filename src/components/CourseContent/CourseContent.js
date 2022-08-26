@@ -251,7 +251,8 @@ const CourseContent = ({ activePeriod, id }) => {
             activePeriod.assignments[id],
             findGroup(id)
         ];
-        assignment.label = tag;
+        
+        if (assignment.label !== tag) assignment.label = tag; 
         console.log(assignment);
 
         id !== idOver && changeGroups({
