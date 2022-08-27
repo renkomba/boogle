@@ -19,9 +19,11 @@ import {
     verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import AddBar from "../../Buttons/AddBar";
 
-const AssignmentGroup = ({ tag, activePeriod, group, activeIds}) => {
-    
+const AssignmentGroup = ({ 
+    tag, activePeriod, group, activeIds, addAssignmentToGroup
+}) => {
     // For draggable GROUP
     const {
         attributes,
@@ -58,15 +60,13 @@ const AssignmentGroup = ({ tag, activePeriod, group, activeIds}) => {
         link: 'fa-solid fa-link'
     };
 
-    const generateBarSpacer = (key = '#0') => {
+    const generateBarSpacer = (key='#0') => {
         return (
-            <div
-                key={key} 
-                className={styles.bar_spacer}
-            >
-                <i className="fa-solid fa-plus"></i>
-                <div></div>
-            </div>
+            <AddBar key={key} 
+                tag={tag} 
+                activePeriod={activePeriod}
+                addAssignmentToGroup={addAssignmentToGroup}
+            />
         )
     }
 
@@ -78,6 +78,7 @@ const AssignmentGroup = ({ tag, activePeriod, group, activeIds}) => {
                 activePeriod.course.assignments[id] 
                 : activePeriod.assignments[id];
             let icon = assignment.type + ' ' + icons[assignment.type];
+            
             assignmentBars.push(...[
                 generateBar(icon, id, assignment),
                 generateBarSpacer(assignment.id.slice(

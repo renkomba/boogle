@@ -6,12 +6,11 @@ import styles from './AddButtons.module.css';
 const AddButtons = ({activePeriod, addAssignmentToGroup}) => {
     const [show, setShow] = useState(false);
 
-    // This is weird, but React is parsing activePeriod as the object of props
-    const createAssignment = () => {
-        let iconJsx = (<i className="assignment fa-solid fa-file-lines"></i>);
+    const createAssignment = (type='assignment') => {
+        let iconJsx = (<i className={`${type} fa-solid fa-file-lines`}></i>);
         let course = activePeriod.course ? activePeriod.course : activePeriod;
-        let assignment = course.addAssignment('assignment');
-        // setShow(true);
+        let assignment = course.addAssignment(type);
+        
         return (
             <AssignmentModal setShow={setShow}
                 addAssignmentToGroup={addAssignmentToGroup}

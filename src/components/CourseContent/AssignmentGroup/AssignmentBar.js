@@ -26,6 +26,7 @@ const AssignmentBar = ({ icon, assignment, activePeriod, activeBarId }) => {
             ]),
         <i className={icon}></i>
     ];
+
     let isCompleted = submissionsObj.isCompleted
         || submissionsObj.turnedIn === activePeriod.totalStudents;
 
@@ -51,14 +52,12 @@ const AssignmentBar = ({ icon, assignment, activePeriod, activeBarId }) => {
             {...listeners}
         >
             {iconJsx}
-            <p 
-                className={styles.title}
+            <p className={styles.title}
                 onClick={ () => setShow(true) }
             >
                 {assignment.title}
             </p>
-            <AssignmentModal
-                show={show}
+            <AssignmentModal show={show}
                 setShow={setShow}
                 iconJsx={iconJsx}
                 assignment={assignment}
