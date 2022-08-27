@@ -9,10 +9,7 @@ const AddBar = ({tag, activePeriod, addAssignmentToGroup}) => {
 
     const createAssignment = (type='assignment') => {
         let iconJsx = (<i className={`${type} fa-solid fa-file-lines`}></i>);
-
         let course = activePeriod.course || activePeriod;
-        console.log(course);
-
         let assignment = course.addAssignment(type, tag);
 
         return (
