@@ -10,10 +10,10 @@ import Input from "../../Prompts/Input";
 const Tags = ({ activePeriod, filterByTag }) => {
     const [showPrompt, setShowPrompt] = useState(false);
     const [tags, setTags] = useState({
-        names: (activePeriod.course ? activePeriod.course 
-            : activePeriod).assignmentLabels,
-        components: (activePeriod.course ? activePeriod.course 
-            : activePeriod).assignmentLabels.sort(
+        names: (activePeriod.course 
+            || activePeriod).assignmentLabels,
+        components: (activePeriod.course 
+            || activePeriod).assignmentLabels.sort(
                 (word, prevWord) => prevWord === 'Class Docs' ?
                     1 : word.localeCompare(prevWord)
         ).map( tag => addToggle(tag) )
@@ -22,10 +22,10 @@ const Tags = ({ activePeriod, filterByTag }) => {
     useEffect(
         () => {
             setTags({
-                names: (activePeriod.course ? activePeriod.course 
-                    : activePeriod).assignmentLabels,
-                components: (activePeriod.course ? activePeriod.course 
-                    : activePeriod).assignmentLabels.sort(
+                names: (activePeriod.course 
+                    || activePeriod).assignmentLabels,
+                components: (activePeriod.course 
+                    || activePeriod).assignmentLabels.sort(
                         (word, prevWord) => prevWord === 'Class Docs' ?
                             1 : word.localeCompare(prevWord)
                 ).map( tag => addToggle(tag) )
@@ -35,10 +35,15 @@ const Tags = ({ activePeriod, filterByTag }) => {
     );
 
     function addToggle(tag='', addedByUser=false) {
-        addedByUser && setTags(tags => ({
-            ...tags,
-            names: [...tags.names, tag]
-        }));
+        addedByUser && setTags({
+            names: (activePeriod.course 
+                || activePeriod).assignmentLabels,
+            components: (activePeriod.course 
+                || activePeriod).assignmentLabels.sort(
+                    (word, prevWord) => prevWord === 'Class Docs' ?
+                        1 : word.localeCompare(prevWord)
+            ).map( tag => addToggle(tag) )
+        });
         
         return (
             <ToggleButton className={styles.tag}
@@ -49,9 +54,12 @@ const Tags = ({ activePeriod, filterByTag }) => {
         );
     }
 
-    const handleToggle = e => {
-        console.log('Handle toggle ran with value:');
-        console.log(e.target.value);
+    const handleToggle = ({target: {value}}) => {
+        if (value) {
+            (activePeriod.course || activePeriod).assignmentLabels = [value];
+        }
+        
+        addToggle(value, true);
         setShowPrompt(false);
     }
 

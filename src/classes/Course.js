@@ -35,8 +35,8 @@ export default class Course {
         return this._assignmentLabels;
     }
 
-    set assignmentLabels(labelsArr) {
-        this._assignmentLabels = labelsArr;
+    set assignmentLabels(labelsArr=[]) {
+        this._assignmentLabels = [...this._assignmentLabels, ...labelsArr];
     }
     
     get id() {
@@ -74,21 +74,19 @@ export default class Course {
         return labels;
     }
 
-    addAssignment(type='') {
+    addAssignment(type='', tag=false) {
         let assignment = new Assignment(
             type, 
             this, 
             Object.keys(this.assignments).length + 1);
         assignment.title = `New ${type[0].toUpperCase() + type.slice(1)}`;
-        // console.log(this.assignments);
-        // console.log(assignment.id);
+        if (tag) assignment.label = tag;
 
         this.assignments[assignment.id] = assignment;
         return assignment;
     }
 
     copyToPeriods(period='', assignment) {
-        console.log(`periods: ${periods}\n`);
         let periods = period === this.title ? this.periods 
             : [this.periods.find(
                 Period => Period.id === period
