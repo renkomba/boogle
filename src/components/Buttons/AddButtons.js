@@ -3,20 +3,19 @@ import Button from "react-bootstrap/Button";
 import AssignmentModal from "../Modal/AssignmentModal";
 import styles from './AddButtons.module.css';
 
-const AddButtons = (activePeriod, addAssignmentToGroup) => {
+const AddButtons = ({activePeriod, addAssignmentToGroup}) => {
     const [show, setShow] = useState(false);
 
     // This is weird, but React is parsing activePeriod as the object of props
     const createAssignment = () => {
         let iconJsx = (<i className="assignment fa-solid fa-file-lines"></i>);
-        let course = activePeriod.activePeriod.course ?
-            activePeriod.activePeriod.course : activePeriod.activePeriod;
+        let course = activePeriod.course ? activePeriod.course : activePeriod;
         let assignment = course.addAssignment('assignment');
         // setShow(true);
         return (
             <AssignmentModal setShow={setShow}
-                addAssignmentToGroup={activePeriod.addAssignmentToGroup}
-                activePeriod={activePeriod.activePeriod} 
+                addAssignmentToGroup={addAssignmentToGroup}
+                activePeriod={activePeriod} 
                 assignment={assignment}
                 iconJsx={iconJsx}
                 show={show}
