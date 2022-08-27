@@ -15,6 +15,9 @@ export default class Assignment {
         this._submissions = 0;
         this.isCompleted = false;
         this.isInProgress = false;
+        this.directions = 'Basic directions'
+        this.dueDate = new Date();
+        this.attachments = [];
     }
 
     set type(newType) {
@@ -23,6 +26,7 @@ export default class Assignment {
 
     set label(newLabel) {
         this._label = newLabel;
+        this.course.initiateLabels();
     }
 
     get type() {

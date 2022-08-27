@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import AssignmentGroup from "./AssignmentGroup/AssignmentGroup";
 import styles from './CourseContent.module.css';
 import { 
@@ -21,6 +21,7 @@ import AssignmentOverlay from "../Overlays/AssignmentOverlay";
 import CategoryOverlay from "../Overlays/CategoryOverlay";
 import CourseSidebar from "../Sidebar/CourseSidebar";
 import AddButtons from "../Buttons/AddButtons";
+import UserContext from "../../contexts/userContext";
 
 const CourseContent = ({ activePeriod, id }) => {
     const [tags, setTags] = useState( activePeriod.course ?
@@ -46,6 +47,8 @@ const CourseContent = ({ activePeriod, id }) => {
             ])
         )
     );
+
+    const { user, currentCourse } = useContext(UserContext);
 
     useEffect(
         () => {
@@ -219,11 +222,11 @@ const CourseContent = ({ activePeriod, id }) => {
             );
     }
 
-    const findTag = barId => {
-        return Object.keys(assignmentGroups).filter(
-            tag => assignmentGroups[tag].includes(barId)
-        )[0];
-    }
+    // const findTag = barId => {
+    //     return Object.keys(assignmentGroups).filter(
+    //         tag => assignmentGroups[tag].includes(barId)
+    //     )[0];
+    // }
 
     const dragBarOver = ({
         activatorEvent: {target: {offsetTop}},
@@ -251,7 +254,7 @@ const CourseContent = ({ activePeriod, id }) => {
             activePeriod.assignments[id],
             findGroup(id)
         ];
-        
+
         if (assignment.label !== tag) assignment.label = tag; 
         console.log(assignment);
 
@@ -262,6 +265,47 @@ const CourseContent = ({ activePeriod, id }) => {
         });
         
         setActiveIds( activeIds => ({...activeIds, bar: null}) );
+    }
+
+    const addAssignmentToGroup = (values=[]) => {
+        let currentCourseAssignments = Object.keys(currentCourse.assignments);
+        let assignmentKey = currentCourseAssignments[currentCourseAssignments.length - 1];
+        let assignment = currentCourse.assignments[assignmentKey];
+        
+        let periods = values.slice(0);
+        [
+            assignment.title, 
+            assignment.type, 
+            assignment.label, 
+            assignment.directions
+        ] = periods.splice(0, 4);
+        assignment.attachments = periods.pop();
+
+        for (let id of periods) {
+            id = id[0].toUpperCase() + id.slice(1);
+            let isCourse = !id.includes('-');
+            let course = isCourse ? user.courses.find(
+                Course => Course.title === id
+            ) : user.courses.find(
+                Course => Course.id === id.split('-').slice(0, 2).join('-')
+            );
+
+            if (course.title === currentCourse.title) {
+                setAssignmentGroups(Object.fromEntries(
+                    (activePeriod.course ? activePeriod.course 
+                    : activePeriod).assignmentLabels.map( tag => [
+                        tag,
+                        Object.values(activePeriod.assignments).filter(
+                            Assignment => Assignment.label === tag
+                        ).map( Assignment => Assignment.id )
+                    ])
+                ));
+                setTags(activePeriod.course ?
+                    activePeriod.course.assignmentLabels 
+                    : activePeriod.assignmentLabels
+                );
+            }
+        }
     }
 
     return (
@@ -313,7 +357,9 @@ const CourseContent = ({ activePeriod, id }) => {
                         </DragOverlay>
                     </DndContext>
                 </section>
-                <AddButtons />
+                <AddButtons activePeriod={activePeriod} 
+                    addAssignmentToGroup={addAssignmentToGroup}
+                />
             </div>
 
         </div>
