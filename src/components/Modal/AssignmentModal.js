@@ -15,7 +15,9 @@ import AttachedLink from "../Attachments/AttachedLink";
 import styles from './AssignmentModal.module.css';
 
 
-const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) => {
+const AssignmentModal = ({ 
+    show, setShow, iconJsx, assignment, activePeriod, addAssignmentToGroup 
+}) => {
     const [isForLink, setIsForLink] = useState(true);
     const [attachedLinks, setAttachedLinks] = useState([]);
     const [files, setFiles] = useState([]);
@@ -56,13 +58,28 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
 
     const handleSubmit = e => {
         e.preventDefault();  // prevent from rerendering the page
+        console.log(e);
         const data = Array.from(e.target).filter( e => e.id )
             .filter( (e, i) => i > 5 ? e.checked : true );
-        const values = data.map( e => e.value !== 'on' ? e.value
-            : e.id.split('-select-all')[0].split('-').join(' ') );
-        console.log('Just submitted:');
-        console.log(data);
-        console.log(values);
+        const values = data.map( (e, i) => i < 5 ? e.value
+            : e.checked ? !e.id.includes('select') ? e.value
+                : e.id.split('-select-all')[0].split('-').join(' ')
+            : '' )
+            .filter( (val, i) => (
+                (i < 5 && val) 
+                || (i > 5 && typeof val === 'object')
+                || (i >= 5 && val)
+            ));
+        // console.log('Just submitted:');
+        // console.log(data);
+        // data.slice(5).forEach( item => console.log(
+        //     `Period ${item.id} (${item.checked ? 'checked' : 'unchecked'})`
+        // ));
+        // console.log(`Attached Files & Links`);
+        // console.log(attachedLinks);
+        // console.log([...values, ...attachedLinks]);
+
+        addAssignmentToGroup([...values, attachedLinks]);
         handleClose();
     }
 
@@ -77,12 +94,12 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
             .nextElementSibling
             .querySelector('input');
 
-        setAttachedLinks( prevArr => [
+        setAttachedLinks( attachedLinks => [
                 <AttachedLink 
-                key={`link-#${prevArr.length + 1}`} 
+                key={`link-#${attachedLinks.length + 1}`} 
                 url={input.value} 
             />,
-            ...prevArr
+            ...attachedLinks
         ]);
         input.value = null;
     }
@@ -95,7 +112,9 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
 
         input = Array.from(input);
         input = input.map( File => (
-            <AttachedFile name={File.name} />
+            <AttachedFile name={File.name} 
+                key={`file-#${files.length + 1}`}
+            />
         ));
 
         setFiles(input);
@@ -209,7 +228,10 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
                         className="directions"
                         label="Directions"
                     >
-                        <Form.Control as="textarea" style={{ height: '100px'}} />
+                        <Form.Control as="textarea" 
+                            style={{ height: '100px'}} 
+                            defaultValue={assignment.directions} 
+                        />
                     </FloatingLabel>
                     <br />
                     <Form.Group className={styles.attachments}>
@@ -322,8 +344,11 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
                                 </Row>
                             )}
                         </Form.Group>
+                        <Form.Group>
+                            <Row id='attached-files-or-links'>{assignment.attachments}</Row>
+                            <Row id='attached-files-or-links'>{attachedLinks}</Row>
+                        </Form.Group>
                     </fieldset>
-                    <Row id='attached-files-or-links'>{attachedLinks}</Row>
                     <Modal.Footer>
                         <Button 
                             variant="secondary" 
@@ -331,7 +356,9 @@ const AssignmentModal = ({ show, setShow, iconJsx, assignment, activePeriod }) =
                         >
                             Close
                         </Button>
-                        <Button type="submit">Update</Button>
+                        <Button type="submit">{
+                            assignment.title === 'New Assignment' ? 'Create' : 'Update'
+                        }</Button>
                     </Modal.Footer>
                 </Form>
             </Modal.Body>
