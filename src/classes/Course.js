@@ -74,6 +74,34 @@ export default class Course {
         return labels;
     }
 
+    addAssignment(type='') {
+        let assignment = new Assignment(
+            type, 
+            this, 
+            Object.keys(this.assignments).length + 1);
+        assignment.title = `New ${type[0].toUpperCase() + type.slice(1)}`;
+        // console.log(this.assignments);
+        // console.log(assignment.id);
+
+        this.assignments[assignment.id] = assignment;
+        return assignment;
+    }
+
+    copyToPeriods(period='', assignment) {
+        console.log(`periods: ${periods}\n`);
+        let periods = period === this.title ? this.periods 
+            : [this.periods.find(
+                Period => Period.id === period
+            )];
+        console.log(periods);
+
+        for (let Period of periods) {
+            let i = Object.keys(Period.assignments).length + 1;
+            let id = `${this.id}-task-#${i}`;
+            Period.assignments[id] = assignment;
+        }
+    }
+
     fetchStudentsArr() {
         //use this.totalStudents to generate an object
         //of Student instances (StudentId: name, course, period)
