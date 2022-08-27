@@ -190,6 +190,7 @@ const CourseContent = ({ activePeriod, id }) => {
                 group={assignmentGroups[tag]}
                 changeAcrossGroups={changeAcrossGroups}
                 activeIds={activeIds}
+                addAssignmentToGroup={addAssignmentToGroup}
             />);
         }
         return groups;

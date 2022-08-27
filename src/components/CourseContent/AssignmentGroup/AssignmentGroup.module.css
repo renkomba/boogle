@@ -15,32 +15,3 @@
     color: var(--light-header-colour);
     border: 4px dotted rgb(50 120 205);
 }
-
-.bar_spacer {
-    display: flex;
-    align-items: center;
-    height: .5rem;
-    transition: .3s ease-in-out;
-}
-
-.bar_spacer > div {
-    flex-grow: 1;
-}
-
-.bar_spacer > i {
-    display: none;
-    font-size: 1rem;
-    margin-right: .5rem;
-    color: blue;
-}
-
-.bar_spacer:hover > i {
-    display: block;
-}
-
-.bar_spacer:hover > div {
-    content: '\2b';
-    border: 2px dashed blue;
-    font-size: 1rem;
-}
-
