@@ -68,7 +68,8 @@ const Tags = ({ activePeriod, filterByTag }) => {
             <h4>Tags</h4>
             <Form>
                 <div className={styles.buttons_n_tags}>
-                    { tags.length > 2 && <Button className={styles.view_all_button}
+                    { tags.names.length > 2 && <Button 
+                        className={styles.view_all_button}
                         onClick={() => filterByTag(tags.names)}
                         type="reset"
                     >All</Button> }
