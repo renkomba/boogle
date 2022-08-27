@@ -12,48 +12,46 @@ import styles from './Tags.module.css';
 
 const Periods = ({ activePeriod, filterByTag }) => {
     const [showPrompt, setShowPrompt] = useState(false);
-    const [periods, setPeriods] = useState((activePeriod.course ? 
-        activePeriod.course : activePeriod).periods.map(
-            Period => addToggle(Period.period)
-        )
-    );
+    const [periods, setPeriods] = useState({
+        ids: (activePeriod.course || activePeriod).periodIds,
+        components: (activePeriod.course 
+            || activePeriod).periods.sort((Period, prevPeriod) => 
+                Period.period.localeCompare(prevPeriod.period)
+            ).map( period => addToggle(period.period) )
+    });
 
     const { changePeriod } = useContext(UserContext);
 
     function addToggle(period='', addedByUser=false) {
-        // console.log(activePeriod);
-        if (addedByUser) {
-            let p = new Period(
-                (activePeriod.course ? activePeriod.course 
-                    : activePeriod).title,
-                activePeriod.course ? activePeriod.course 
-                    : activePeriod,
-                `${period}${getOrdinalSuffix(period)} Period`
-            );
+        addedByUser && setPeriods({
+            ids: (activePeriod.course || activePeriod).periodIds,
+            components: (activePeriod.course 
+                || activePeriod).periods.sort((Period, prevPeriod) => 
+                    Period.period.localeCompare(prevPeriod.period)
+                ).map( Period => addToggle(Period.period) )
+        });
 
-            p.course.periods = p;
-            period = p.period;
-        }
-
-        let toggleButton = (<ToggleButton value={period}
+        return (<ToggleButton value={period}
             checked={period === activePeriod.period}
             key={period.split(' ').join('-')}
             id={period.split(' ').join('-')}
             className={styles.tag}
         >{period}</ToggleButton>);
-
-        addedByUser && setPeriods(periods => [ 
-            ...periods, toggleButton 
-        ]);
-
-        return toggleButton;
     }
 
-    const handleToggle = e => {
-        console.log('Handle toggle ran with value:');
-        console.log(e);
+    const handleToggle = ({ target: {value}}) => {
+        console.log(`Handle toggle ran with value: ${value}`);
+        if (value) {
+            let period = new Period(
+                (activePeriod.course || activePeriod).title,
+                (activePeriod.course || activePeriod),
+                `${value}${getOrdinalSuffix(value)} Period`
+            );
+            period.course.periods = period;
+        }
+        
+        addToggle(value, true);
         setShowPrompt(false);
-        addToggle(e.target.value, true);
     }
 
     // const filterAssignmentGroups = selectedLabelsArr => {
@@ -67,9 +65,10 @@ const Periods = ({ activePeriod, filterByTag }) => {
             <h4>Periods</h4>
             <Form>
                 <div className={styles.buttons_n_tags}>
-                    { periods.length > 2 && <Button type="reset"
-                        onClick={ () => filterByTag(periods) }
+                    { periods.ids.length > 2 && <Button 
                         className={styles.view_all_button}
+                        onClick={ () => filterByTag(periods.names) }
+                        type="reset"
                     >All</Button> }
 
                     <ToggleButtonGroup onChange={changePeriod}
@@ -79,7 +78,7 @@ const Periods = ({ activePeriod, filterByTag }) => {
                         size="sm"
                         vertical
                     >
-                        {periods}
+                        {periods.components}
                     </ToggleButtonGroup>
 
                     { showPrompt ? <Input inputType="number"
