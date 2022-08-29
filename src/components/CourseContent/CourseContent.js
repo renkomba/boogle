@@ -24,28 +24,29 @@ import AddButtons from "../Buttons/AddButtons";
 import UserContext from "../../contexts/userContext";
 
 const CourseContent = ({ activePeriod, id }) => {
-    const [tags, setTags] = useState( activePeriod.course ?
-        activePeriod.course.assignmentLabels 
-        : activePeriod.assignmentLabels
-    );
+    const [tags, setTags] = useState({
+        names: (activePeriod.course || activePeriod).assignmentLabels,
+        components: (activePeriod.course || activePeriod).assignmentLabels.sort(
+                (word, prevWord) => prevWord === 'Class Docs' ?
+                    1 : word.localeCompare(prevWord)
+            ),
+        active: null
+    });
+
     const [activeIds, setActiveIds] = useState({
         bar: null,
         group: null
     });
+
     const [assignmentGroups, setAssignmentGroups] = useState(
-        Object.fromEntries( activePeriod.course ? 
-            activePeriod.course.assignmentLabels.map( tag => [
+        Object.fromEntries( (activePeriod.course || activePeriod).assignmentLabels.map( 
+            tag => [
                 tag,
                 Object.values(activePeriod.assignments).filter(
                     Assignment => Assignment.label === tag
                 ).map( Assignment => Assignment.id )
-            ]) : activePeriod.assignmentLabels.map( tag => [
-                tag,
-                Object.values(activePeriod.assignments).filter(
-                    Assignment => Assignment.label === tag
-                ).map( Assignment => Assignment.id )
-            ])
-        )
+            ]
+        ))
     );
 
     const { user, currentCourse } = useContext(UserContext);
@@ -60,7 +61,7 @@ const CourseContent = ({ activePeriod, id }) => {
                 ))
             );
         },
-        [tags]
+        [tags.names]
     );
     
     const { setNodeRef : setContentNodeRef } = useDroppable({ id });
@@ -301,10 +302,11 @@ const CourseContent = ({ activePeriod, id }) => {
                         ).map( Assignment => Assignment.id )
                     ])
                 ));
-                setTags(activePeriod.course ?
-                    activePeriod.course.assignmentLabels 
-                    : activePeriod.assignmentLabels
-                );
+
+                setTags( tags => ({
+                    ...tags,
+                    names: (activePeriod.course || activePeriod).assignmentLabels
+                }));
             }
         }
     }
@@ -313,6 +315,8 @@ const CourseContent = ({ activePeriod, id }) => {
         <div className={styles.course_content}>
             <CourseSidebar activePeriod={activePeriod}
                 filterByTag={filterByTag}
+                setTags={setTags}
+                tags={tags}
             />
 
             <div className={styles.buttons_and_assignments}>
@@ -337,12 +341,12 @@ const CourseContent = ({ activePeriod, id }) => {
                                     {generateGroups()}
                                 </article>
                                 <DragOverlay>
-                                    {activeIds.bar && 
-                                        <AssignmentOverlay 
-                                            id={activeIds.bar}
-                                            label={activePeriod.course ?
-                                                activePeriod.course.assignments[activeIds.bar].title
-                                                : activePeriod.assignments[activeIds.bar].title}
+                                    {activeIds.bar && <AssignmentOverlay 
+                                        id={activeIds.bar}
+                                        label={(activePeriod.course || activePeriod)
+                                            .assignments[activeIds.bar]
+                                            .title
+                                        }
                                     /> }
                                 </DragOverlay>
                             </DndContext>

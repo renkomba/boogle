@@ -7,35 +7,40 @@ import styles from './Tags.module.css';
 import Input from "../../Prompts/Input";
 
 
-const Tags = ({ activePeriod, filterByTag }) => {
+const Tags = ({ activePeriod, filterByTag, tags, setTags }) => {
     const [showPrompt, setShowPrompt] = useState(false);
-    const [tags, setTags] = useState({
-        names: (activePeriod.course 
-            || activePeriod).assignmentLabels,
-        components: (activePeriod.course 
-            || activePeriod).assignmentLabels.sort(
-                (word, prevWord) => prevWord === 'Class Docs' ?
-                    1 : word.localeCompare(prevWord)
-        ).map( tag => addToggle(tag) )
-    });
+    // const [tags, setTags] = useState({
+    //     names: (activePeriod.course 
+    //         || activePeriod).assignmentLabels,
+    //     components: (activePeriod.course 
+    //         || activePeriod).assignmentLabels.sort(
+    //             (word, prevWord) => prevWord === 'Class Docs' ?
+    //                 1 : word.localeCompare(prevWord)
+    //     ).map( tag => addToggle(tag) )
+    // });
 
     useEffect(
         () => {
-            setTags({
-                names: (activePeriod.course 
-                    || activePeriod).assignmentLabels,
-                components: (activePeriod.course 
-                    || activePeriod).assignmentLabels.sort(
-                        (word, prevWord) => prevWord === 'Class Docs' ?
-                            1 : word.localeCompare(prevWord)
-                ).map( tag => addToggle(tag) )
-            });
+            setTags( tags => ({
+                ...tags,
+                components: tags.names.map( 
+                    tag => addToggle(tag) 
+                )
+            }) );
         },
         [activePeriod]
     );
 
+    // setTags(tags => ({
+    //     ...tags,
+    //     components: tags.components.map( 
+    //         tag => addToggle(tag) 
+    //     )
+    // }));
+
     function addToggle(tag='', addedByUser=false) {
-        addedByUser && setTags({
+        addedByUser && setTags( tags => ({
+            ...tags,
             names: (activePeriod.course 
                 || activePeriod).assignmentLabels,
             components: (activePeriod.course 
@@ -43,14 +48,14 @@ const Tags = ({ activePeriod, filterByTag }) => {
                     (word, prevWord) => prevWord === 'Class Docs' ?
                         1 : word.localeCompare(prevWord)
             ).map( tag => addToggle(tag) )
-        });
+        }) );
         
         return (
             <ToggleButton className={styles.tag}
                 key={tag.split(' ').join('-')}
                 id={tag.split(' ').join('-')}
                 value={tag}
-            >{tag}</ToggleButton>
+            >{tag[0].toUpperCase() + tag.slice(1)}</ToggleButton>
         );
     }
 
@@ -61,6 +66,7 @@ const Tags = ({ activePeriod, filterByTag }) => {
         
         addToggle(value, true);
         setShowPrompt(false);
+        // setAssignmentGroups();
     }
 
     return (
